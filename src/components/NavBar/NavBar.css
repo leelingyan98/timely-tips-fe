@@ -1,0 +1,12 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  
+#menu {
+display: flex;
+}

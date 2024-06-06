@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Post from '../../components/Post/Post'
 
-export default function Home() {
+export default function Bookmarks() {
   return (
     <>
       <div>
-        <p>Home Page</p>
+        <p>Bookmarks Page</p>
         <Post />
       </div>
     </>

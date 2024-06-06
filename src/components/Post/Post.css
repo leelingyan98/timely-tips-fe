@@ -1,0 +1,9 @@
+.post-container {
+    width: 500px;
+    border: 1px solid black;
+}
+
+.top-row, .bottom-row {
+    display: flex;
+    justify-content: space-between;
+}
