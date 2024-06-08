@@ -1,8 +1,8 @@
-.UserLogOut {
+.UserMenu {
   font-size: 1.5vmin;
   text-align: center;
 }
 
-.UserLogOut .email {
+.UserMenu .email {
   font-size: smaller;
 }

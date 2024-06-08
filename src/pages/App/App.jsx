@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import './App.css'
 import { getUser } from '../../utilities/users-service.js';
 import NavBar from '../../components/NavBar/NavBar'
@@ -29,6 +29,7 @@ function App() {
                 <Route path="/comments" element={<Comments />} />
                 <Route path="/profile/:handle" element={<Profile />} />
                 <Route path="/post/:id" element={<SinglePost />} />
+                <Route path="*" element={<Navigate to="/home" replace />} />
               </Routes>
             </>
             :

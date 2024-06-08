@@ -1,7 +1,8 @@
-import './UserLogOut.css';
+import { Link } from 'react-router-dom';
+import './UserMenu.css';
 import { logOut } from '../../utilities/users-service.js';
 
-export default function UserLogOut({ user, setUser }) {
+export default function UserMenu({ user, setUser }) {
   function handleLogOut() {
     logOut();
     setUser(null);
@@ -10,9 +11,8 @@ export default function UserLogOut({ user, setUser }) {
   return (
     <>
     { user ? 
-      <div className="UserLogOut">
-        <div>{user.username}</div>
-        <div className="email">{user.email}</div>
+      <div className="UserMenu">
+        <div><Link to={`/profile/${user.username}`}>{`@${user.username}`}</Link></div>
         <button className="btn-sm" onClick={handleLogOut}>LOG OUT</button>
       </div>
       :
