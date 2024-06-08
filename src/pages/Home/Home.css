@@ -1,0 +1,9 @@
+span {
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bold;
+    cursor: context-menu;
+}
+

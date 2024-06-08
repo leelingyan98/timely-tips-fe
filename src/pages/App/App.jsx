@@ -5,6 +5,8 @@ import { getUser } from '../../utilities/users-service.js';
 import NavBar from '../../components/NavBar/NavBar'
 import Home from '../Home/Home'
 import Following from '../Following/Following';
+import ProfileFollowers from '../ProfileFollowers/ProfileFollowers'
+import ProfileFollowings from '../ProfileFollowings/ProfileFollowings'
 import Bookmarks from '../Bookmarks/Bookmarks';
 import UserSearch from '../UserSearch/UserSearch.jsx';
 import Comments from '../Comments/Comments';
@@ -25,12 +27,14 @@ function App() {
             <>
               <NavBar user={user} setUser={setUser} />
               <Routes>
-                <Route path="/home" element={<Home />} />
+                <Route path="/home" element={<Home />} user={user} />
                 <Route path="/following" element={<Following />} />
-                <Route path="/bookmarks" element={<Bookmarks />} />
+                <Route path="/bookmarks" element={<Bookmarks />} user={user} />
                 <Route path="/search" element={<UserSearch />} />
-                <Route path="/comments" element={<Comments />} />
+                <Route path="/comments" element={<Comments />} user={user} />
                 <Route path="/profile/:handle" element={<Profile />} />
+                <Route path="/profile/:handle/following" element={<ProfileFollowings />} />
+                <Route path="/profile/:handle/followers" element={<ProfileFollowers />} />
                 <Route path="/post/:id" element={<SinglePost />} />
                 <Route path="*" element={<Navigate to="/home" replace />} />
               </Routes>

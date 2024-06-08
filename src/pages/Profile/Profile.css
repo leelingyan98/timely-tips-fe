@@ -1,0 +1,23 @@
+.about {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 10px;
+}
+
+.profile-picture {
+    margin-right: 10px;
+}
+
+.profile-picture img {
+    border-radius: 99px;
+}
+
+.profile-details h2, .profile-details p {
+    margin: 0;
+}
+
+.profile-details {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+}

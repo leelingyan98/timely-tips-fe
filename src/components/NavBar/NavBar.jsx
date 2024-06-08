@@ -13,9 +13,8 @@ export default function NavBar({ user, setUser }) {
               </Link>
             </div>
             <div id="nav-links">
-                <Link to="/following">Following</Link>
                 <Link to="/bookmarks">Bookmarks</Link>
-                <Link to="/comments">Comments</Link>
+                <Link to="/search">Search</Link>
             </div>
         </div>
         <div>
