@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './NavBar.css'
+import UserLogOut from '../UserLogOut/UserLogOut'
 
-export default function NavBar() {
+export default function NavBar({ user, setUser }) {
   return (
     <nav>
         <div id="menu">
@@ -19,6 +20,7 @@ export default function NavBar() {
         </div>
         <div>
             <img src="https://placehold.co/64x64.png" />
+            <UserLogOut user={user} setUser={setUser} />
         </div>
     </nav>
   )
