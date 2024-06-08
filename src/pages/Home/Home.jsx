@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <CreatePostForm />
-      <p>Recent tips</p>
+      <h2>Recent tips</h2>
       <Post />
     </div>
   )

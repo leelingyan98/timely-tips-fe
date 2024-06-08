@@ -6,10 +6,12 @@ import NavBar from '../../components/NavBar/NavBar'
 import Home from '../Home/Home'
 import Following from '../Following/Following';
 import Bookmarks from '../Bookmarks/Bookmarks';
+import UserSearch from '../UserSearch/UserSearch.jsx';
 import Comments from '../Comments/Comments';
 import Profile from '../Profile/Profile'
 import SinglePost from '../SinglePost/SinglePost'
 import LoginPage from '../LoginPage/LoginPage';
+
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -26,6 +28,7 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/following" element={<Following />} />
                 <Route path="/bookmarks" element={<Bookmarks />} />
+                <Route path="/search" element={<UserSearch />} />
                 <Route path="/comments" element={<Comments />} />
                 <Route path="/profile/:handle" element={<Profile />} />
                 <Route path="/post/:id" element={<SinglePost />} />
