@@ -24,7 +24,7 @@ export function findByUsername(username) {
   return sendRequest(`${BASE_URL}/find/username/${username}`);
 }
 
-export function removePost(postid) {
-  return sendRequest(`${BASE_URL}/delete/id/${postid}`, "DELETE");
+export function removePost(postId) {
+  return sendRequest(`${BASE_URL}/delete/id/${postId}`, "DELETE");
 }
 

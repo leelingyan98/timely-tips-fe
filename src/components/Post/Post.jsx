@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './Post.css'
 
 export default function Post() {
@@ -22,8 +23,8 @@ export default function Post() {
         <p className="content">Post text here</p>
         <div className="photo">Post image here</div>
         <div className="bottom-row">
-          <button>View Post</button>
-          <div className="comments">
+          <button><Link to="/post/666477acc6aa54f183e70337">View Post</Link></button>
+          <div className="comments-count">
             xxx comments
           </div>
         </div>
