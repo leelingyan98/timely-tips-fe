@@ -1,20 +1,15 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import CreateCommentForm from '../../components/CreateCommentsForm/CreateCommentForm';
+import BackButton from '../../components/BackButton/BackButton';
 
 export default function SinglePost() {
   const { id } = useParams();
-  const navigate = useNavigate();
-  
-  // Navigate back to previous page
-  function previousPage() {
-    navigate(-1);
-  };
 
   return (
     <>
       <div className="post-container">
-        <button onClick={previousPage} >Go back</button>
+        <BackButton />
         <div className="top-row">
           <div className="post-creator">
             <div className="display-picture"></div>

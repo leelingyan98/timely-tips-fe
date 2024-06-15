@@ -1,8 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Post.css'
+import * as usersAPI from '../../utilities/users-api.js';
 
-export default function Post() {
+export default function Post({ postData }) {
+  const [postUser, setPostUser] = useState({});
+
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await usersAPI.findByUserId(postData.user);
+      setPostUser(userData);
+    }
+    getUser();
+  }, [postData])
+
   return (
     <>
       <div className="post-container">
@@ -10,8 +21,18 @@ export default function Post() {
           <div className="post-creator">
             <div className="display-picture"></div>
             <div className="post-creator-name">
-              <span className="display-name">Display name</span>
-              <span className="handle">@handle</span>
+              { postUser.displayName ?
+                <span className="display-name">{postUser.displayName}</span>
+                :
+                null
+              }
+              { postUser.username ?
+                <Link to={`/profile/${postUser.username}`}>
+                  <span className="handle">@{postUser.username}</span>
+                </Link>
+                :
+                null
+              }
             </div>
           </div>
           <div className="actions">
@@ -20,10 +41,12 @@ export default function Post() {
             <button>...</button>
           </div>
         </div>
-        <p className="content">Post text here</p>
+        <p className="content">
+          {postData.content}
+        </p>
         <div className="photo">Post image here</div>
         <div className="bottom-row">
-          <button><Link to="/post/666477acc6aa54f183e70337">View Post</Link></button>
+          <button><Link to={`/post/${postData._id}`}>View Post</Link></button>
           <div className="comments-count">
             xxx comments
           </div>
