@@ -6,10 +6,12 @@
 
 .profile-picture {
     margin-right: 10px;
+    width: 72px;
 }
 
 .profile-picture img {
     border-radius: 99px;
+    width: 100%;
 }
 
 .profile-details h2, .profile-details p {
