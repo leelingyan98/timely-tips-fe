@@ -16,6 +16,10 @@ export function findByPostId(postId) {
   return sendRequest(`${BASE_URL}/find/id/${postId}`);
 }
 
+export function findByPostIdGetUser(postId) {
+  return sendRequest(`${BASE_URL}/find/id/${postId}/user`);
+}
+
 export function findByUserId(userId) {
   return sendRequest(`${BASE_URL}/find/user/${userId}`);
 }

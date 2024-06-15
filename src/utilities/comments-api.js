@@ -16,6 +16,10 @@ export function findByCommentId(commentId) {
   return sendRequest(`${BASE_URL}/find/id/${commentId}`);
 }
 
+export function findByPostId(postId) {
+  return sendRequest(`${BASE_URL}/find/post/${postId}`);
+}
+
 export function findByUserId(userId) {
   return sendRequest(`${BASE_URL}/find/user/${userId}`);
 }
@@ -27,4 +31,3 @@ export function findByUsername(username) {
 export function removeComment(commentId) {
   return sendRequest(`${BASE_URL}/delete/id/${commentId}`, "DELETE");
 }
-
