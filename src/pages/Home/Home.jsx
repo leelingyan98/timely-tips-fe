@@ -50,6 +50,7 @@ export default function Home({ user }) {
             <div key={post._id}>
               <Post
                 postData={post}
+                singlePost={false}
               />
             </div>
           ))}

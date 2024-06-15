@@ -8,27 +8,19 @@ import * as postsAPI from '../../utilities/posts-api.js';
 import BackButton from '../../components/BackButton/BackButton.jsx';
 
 export default function Profile() {
-  const [user, setUser] = useState(getUser());
   const [profileUser, setProfileUser] = useState({});
   const [posts, setPosts] = useState([]);
   const { handle } = useParams();
 
   useEffect(() => {
-    const getProfileUser = async () => {
+    const getProfileData = async () => {
       const data = await usersAPI.findByUsername(handle);
-      console.log('data', data)
+      const posts = await postsAPI.findByUsername(handle);
+      setPosts(posts);
       setProfileUser(data);
     }
-    getProfileUser();
+    getProfileData();
   }, [])
-
-  useEffect(() => {
-    const getUserPosts = async() => {
-      const posts = await postsAPI.findByUsername(profileUser.username);
-      setPosts(posts);
-    }
-    getUserPosts();
-  }, [profileUser])
 
   return (
     <>
@@ -60,9 +52,8 @@ export default function Profile() {
                 {posts.map((post) => (
                   <div key={post._id}>
                     <Post
-                      username={profileUser.username}
-                      displayName={profileUser.displayName}
                       postData={post}
+                      singlePost={false}
                     />
                   </div>
                 ))}
