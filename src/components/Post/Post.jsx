@@ -19,21 +19,25 @@ export default function Post({ postData }) {
       <div className="post-container">
         <div className="top-row">
           <div className="post-creator">
-            <div className="display-picture"></div>
-            <div className="post-creator-name">
-              { postUser.displayName ?
-                <span className="display-name">{postUser.displayName}</span>
-                :
-                null
-              }
-              { postUser.username ?
-                <Link to={`/profile/${postUser.username}`}>
-                  <span className="handle">@{postUser.username}</span>
-                </Link>
-                :
-                null
-              }
-            </div>
+            {postUser ?
+              <>
+                <div className="display-picture">
+                  <img src={`${postUser.profilePicture}`} />
+                </div>
+                <div className="post-creator-name">
+                  {postUser.displayName ?
+                    <span className="display-name">{postUser.displayName}</span>
+                    :
+                    null
+                  }
+                  <Link to={`/profile/${postUser.username}`}>
+                    <span className="handle">@{postUser.username}</span>
+                  </Link>
+                </div>
+              </>
+              :
+              null
+            }
           </div>
           <div className="actions">
             <button>xx Like</button>

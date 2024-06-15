@@ -4,6 +4,11 @@ import './NavBar.css'
 import UserMenu from '../UserMenu/UserMenu'
 
 export default function NavBar({ user, setUser }) {
+  function showOptions() {
+    const userOption = document.getElementById("user-options");
+    userOption.classList.toggle("active");
+  };
+
   return (
     <nav>
         <div id="menu">
@@ -17,9 +22,17 @@ export default function NavBar({ user, setUser }) {
                 <Link to="/search">Search</Link>
             </div>
         </div>
-        <div>
-            <img src="https://placehold.co/64x64.png" />
-            <UserMenu user={user} setUser={setUser} />
+        <div id="user-profile" onClick={showOptions} >
+          { user ? 
+            <>
+              <img className="profile-picture" src={`${user.profilePicture}`} />
+              <div id="user-options">
+                <UserMenu user={user} setUser={setUser} />
+              </div>
+            </>
+            :
+            null
+          }  
         </div>
     </nav>
   )

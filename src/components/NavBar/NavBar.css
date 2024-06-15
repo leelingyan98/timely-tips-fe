@@ -8,5 +8,28 @@ nav {
 }
   
 #menu {
-display: flex;
+    display: flex;
+    position: relative;
+}
+
+#user-profile {
+    cursor: pointer;
+}
+
+img.profile-picture {
+    width: 32px;
+}
+
+
+#user-options {
+    display: none;
+}
+
+#user-options.active {
+    display: block;
+    border: 1px solid black;
+    position: absolute;
+    top: 32px;
+    right: 0;
+    z-index: 1;
 }
