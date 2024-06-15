@@ -16,16 +16,16 @@ export default function SignUpForm({ setUser }) {
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (evt) => {
     setUserData({
       ...userData,
-      [e.target.name]: e.target.value,
+      [evt.target.name]: evt.target.value,
     });
     console.log('user Data', userData);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
     try {
       console.log('submit user Data', userData);
       const user = await signUp(userData);

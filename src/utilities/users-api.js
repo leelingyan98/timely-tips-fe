@@ -15,3 +15,23 @@ export function login(credentials) {
 export function checkTokenAPI() {
   return sendRequest(`${BASE_URL}/check-token`);
 }
+
+export function findAllUsers() {
+  return sendRequest(`${BASE_URL}/find`);
+}
+
+export function findByUserId(userId) {
+  return sendRequest(`${BASE_URL}/find/id/${userId}`);
+}
+
+export function findByUsername(username) {
+  return sendRequest(`${BASE_URL}/find/username/${username}`);
+}
+
+export function search(searchTerm) {
+  return sendRequest(`${BASE_URL}/search/${searchTerm}`)
+}
+
+export function removeUser(userId) {
+  return sendRequest(`${BASE_URL}/delete/id/${userId}`, "DELETE");
+}

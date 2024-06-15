@@ -42,7 +42,7 @@ export default function CreateCommentForm({ postObj }) {
         </textarea>
         <div className="bottom-row">
           <p>xxx/500 characters</p>
-          <button className="submit-btn" type="submit">Comment</button>
+          <input className="submit-btn" type="submit" value="Comment" />
         </div>
       </form>
     </div>

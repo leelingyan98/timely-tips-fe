@@ -1,0 +1,8 @@
+.search-container {
+    display: flex;
+    flex-flow: column wrap;
+}
+.user-search {
+    list-style-type: none;
+    padding: 0;
+}

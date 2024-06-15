@@ -65,7 +65,7 @@ export default function CreatePostForm() {
             onChange={handleChange}
           />
           <p>xxx/500 characters</p>
-          <button className="submit-btn" type="submit">Post</button>
+          <input className="submit-btn" type="submit" value="Post" />
         </div>
       </form>
     </div>
