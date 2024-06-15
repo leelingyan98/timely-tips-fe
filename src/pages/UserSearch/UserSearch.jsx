@@ -6,12 +6,10 @@ import * as usersAPI from '../../utilities/users-api.js';
 
 export default function UserSearch() {
   const [searchInput, setSearchInput] = useState('');
-  const [searchData, setSearchData] = useState('');
-  const [searchResults, setSearchResults] = useState('');
-  const [error, setError] = useState("");
+  const [searchData, setSearchData] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    console.log(searchData)
     const searchUsers = async () => {
       const data = await usersAPI.search(searchData);
       console.log('data', data)
@@ -34,7 +32,7 @@ export default function UserSearch() {
         setSearchInput={setSearchInput}
         handleSubmit={handleSubmit}
       />
-      { searchResults ? 
+      { searchResults.length > 0 ? 
         <ul className="user-search">
           {searchResults.map((user) => (
           <li key={user._id}><UserSearchCard username={user.username} displayName={user.displayName} /></li>
