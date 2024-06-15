@@ -14,7 +14,6 @@ import Profile from '../Profile/Profile'
 import SinglePost from '../SinglePost/SinglePost'
 import LoginPage from '../LoginPage/LoginPage';
 
-
 function App() {
   const [user, setUser] = useState(getUser());
 

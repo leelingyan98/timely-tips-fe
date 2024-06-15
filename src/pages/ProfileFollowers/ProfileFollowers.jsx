@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getUser } from '../../utilities/users-service.js';
+import { findByTargetUsername } from '../../utilities/followings-api.js';
 
 export default function ProfileFollowers() {
   const { handle } = useParams();
-  const [user, setUser] = useState(getUser());
+  const [followers, setFollowers] = useState([]);
+
+  useEffect(() => {
+    const getFollowers = async () => {
+      const data = await findByTargetUsername(handle);
+      console.log(data)
+      setFollowers(data);
+    };
+    getFollowers();
+  }, [handle])
 
   return (
     <>
@@ -14,9 +23,17 @@ export default function ProfileFollowers() {
         &nbsp;|&nbsp;
         <strong>Followers</strong>
       </p>
-      <div>
-        <p>Profile Followers Page</p>
-      </div>
+      {followers.length > 0 ?
+        <>
+          {followers.map((follower) => (
+            <div key={follower._id}>
+              <FollowUserCard userId={follower.followingUser} />
+            </div>
+          ))}
+        </>
+        :
+        "Not followers yet..."
+      }
     </>
   )
 }
