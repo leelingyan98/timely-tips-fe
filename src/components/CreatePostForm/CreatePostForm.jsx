@@ -64,7 +64,7 @@ export default function CreatePostForm() {
             accept="image/*"
             onChange={handleChange}
           />
-          <p>xxx/500 characters</p>
+          <p>{postDetails.content.length}/500 characters</p>
           <input className="submit-btn" type="submit" value="Post" />
         </div>
       </form>

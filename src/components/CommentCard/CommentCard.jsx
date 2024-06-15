@@ -25,8 +25,7 @@ export default function CommentCard({ commentData }) {
                 <div className="text">
                     <div><Link to={`/profile/${commentUser.username}`}>@{commentUser.username}</Link> {formatTimeAgo(commentData.createdAt)}</div>
                     <div className="content">{commentData.content}</div>
-                </div>
-                
+                </div>      
             </div>
         </>
     )
