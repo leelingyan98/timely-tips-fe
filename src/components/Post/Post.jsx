@@ -5,6 +5,7 @@ import * as usersAPI from '../../utilities/users-api.js';
 import * as commentsAPI from '../../utilities/comments-api.js';
 import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm';
 import CommentCard from '../../components/CommentCard/CommentCard';
+import { formatTimeAgo } from "../../utilities/common.js";
 
 export default function Post({ postData, singlePost }) {
   const [postUser, setPostUser] = useState({});
@@ -41,6 +42,7 @@ export default function Post({ postData, singlePost }) {
                   <Link to={`/profile/${postUser.username}`}>
                     <span className="handle">@{postUser.username}</span>
                   </Link>
+                  <div>{formatTimeAgo(postData.createdAt)}</div>
                 </div>
               </>
               :

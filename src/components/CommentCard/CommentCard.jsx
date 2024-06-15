@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import * as usersAPI from '../../utilities/users-api.js';
+import { formatTimeAgo } from "../../utilities/common.js";
+import "./CommentCard.css"
 
 export default function CommentCard({ commentData }) {
     const [commentUser, setCommentUser] = useState({});
@@ -17,8 +19,14 @@ export default function CommentCard({ commentData }) {
     return (
         <>
             <div className="comments">
-                <div><Link to={`/profile/${commentUser.username}`}>@{commentUser.username}</Link> {commentData.createdAt}</div>
-                <div className="content">{commentData.content}</div>
+                <div className="display-picture">
+                  <img src={`${commentUser.profilePicture}`} />
+                </div>
+                <div className="text">
+                    <div><Link to={`/profile/${commentUser.username}`}>@{commentUser.username}</Link> {formatTimeAgo(commentData.createdAt)}</div>
+                    <div className="content">{commentData.content}</div>
+                </div>
+                
             </div>
         </>
     )

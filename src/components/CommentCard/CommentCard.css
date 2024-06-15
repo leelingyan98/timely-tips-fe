@@ -1,0 +1,9 @@
+.comments {
+    display: flex;
+}
+
+.comments .text {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+}

@@ -13,8 +13,13 @@
     display: flex;
 }
 
+.post-creator-name {
+    text-align: left;
+}
+
 .display-picture {
     width: 64px;
+    margin-right: 10px;
 }
 
 .display-picture img {
