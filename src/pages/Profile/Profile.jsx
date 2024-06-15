@@ -15,9 +15,10 @@ export default function Profile() {
   useEffect(() => {
     const getProfileData = async () => {
       const data = await usersAPI.findByUsername(handle);
+      setProfileUser(data);
+      
       const posts = await postsAPI.findByUsername(handle);
       setPosts(posts);
-      setProfileUser(data);
     }
     getProfileData();
   }, [])

@@ -2,17 +2,24 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Post.css'
 import * as usersAPI from '../../utilities/users-api.js';
+import * as commentsAPI from '../../utilities/comments-api.js';
 import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm';
+import CommentCard from '../../components/CommentCard/CommentCard';
 
 export default function Post({ postData, singlePost }) {
   const [postUser, setPostUser] = useState({});
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    const getUser = async () => {
+    const getPostData = async () => {
       const userData = await usersAPI.findByUserId(postData.user);
       setPostUser(userData);
+
+      const commentsData = await commentsAPI.findByPostId(postData._id);
+      console.log(commentsData);
+      setComments(commentsData);
     }
-    getUser();
+    getPostData();
   }, [postData])
 
   return (
@@ -46,31 +53,38 @@ export default function Post({ postData, singlePost }) {
             <button>...</button>
           </div>
         </div>
+
         <p className="content">
           {postData.content}
         </p>
         <div className="photo">Post image here</div>
+
         {singlePost ?
           <>
-            <div className="bottom-row comments-count">
-              xxx comments
-            </div>
             <CreateCommentForm postObj={postData._id} />
-            <div className="comments">
-              <div>@handle timestamp</div>
-              <div>comment content</div>
+            <div className="bottom-row comments-count">
+              {comments.length} comments
             </div>
+            {comments.length > 0 ?
+              <>
+                {comments.map((comment) => (
+                  <div key={comment._id}>
+                    <CommentCard commentData={comment} />
+                  </div>
+                ))}
+              </>
+              : null
+            }
           </>
           :
           <>
             <div className="bottom-row">
               <button><Link to={`/post/${postData._id}`}>View Post</Link></button>
               <div className="comments-count">
-                xxx comments
+              {comments.length} comments
               </div>
             </div>
           </>
-
         }
 
       </div>
