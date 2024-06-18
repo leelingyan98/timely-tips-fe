@@ -30,7 +30,7 @@ export default function Home({ user, setUser }) {
 
   return (
     <div>
-      <CreatePostForm />
+      <CreatePostForm user={user} />
       <p>
         <span className="active" id="recent" onClick={changeFilter}>Recent</span>
         &nbsp;|&nbsp;

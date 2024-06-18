@@ -114,6 +114,8 @@ export default function Profile({ user, setUser }) {
                 {posts.map((post) => (
                   <div key={post._id}>
                     <Post
+                      user={user}
+                      setUser={setUser}
                       postData={post}
                       singlePost={false}
                     />
