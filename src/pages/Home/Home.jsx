@@ -49,6 +49,7 @@ export default function Home({ user }) {
           {posts.map((post) => (
             <div key={post._id}>
               <Post
+                user={user}
                 postData={post}
                 singlePost={false}
               />

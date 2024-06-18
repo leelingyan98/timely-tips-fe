@@ -7,7 +7,7 @@ import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentF
 import CommentCard from '../../components/CommentCard/CommentCard';
 import { formatTimeAgo } from "../../utilities/common.js";
 
-export default function Post({ postData, singlePost }) {
+export default function Post({ user, postData, singlePost }) {
   const [postUser, setPostUser] = useState({});
   const [comments, setComments] = useState([]);
 
@@ -17,7 +17,6 @@ export default function Post({ postData, singlePost }) {
       setPostUser(userData);
 
       const commentsData = await commentsAPI.findByPostId(postData._id);
-      console.log(commentsData);
       setComments(commentsData);
     }
     getPostData();

@@ -26,12 +26,12 @@ function App() {
             <>
               <NavBar user={user} setUser={setUser} />
               <Routes>
-                <Route path="/home" element={<Home />} user={user} />
+                <Route path="/home" element={<Home user={user} />} />
                 <Route path="/following" element={<Following />} />
-                <Route path="/bookmarks" element={<Bookmarks />} user={user} />
+                <Route path="/bookmarks" element={<Bookmarks user={user} />} />
                 <Route path="/search" element={<UserSearch />} />
-                <Route path="/comments" element={<Comments />} user={user} />
-                <Route path="/profile/:handle" element={<Profile />} />
+                <Route path="/comments" element={<Comments user={user} />} />
+                <Route path="/profile/:handle" element={<Profile user={user} />} />
                 <Route path="/profile/:handle/following" element={<ProfileFollowings />} />
                 <Route path="/profile/:handle/followers" element={<ProfileFollowers />} />
                 <Route path="/post/:id" element={<SinglePost />} />

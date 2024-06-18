@@ -32,6 +32,6 @@ export function findByUsers(targetUserId) {
   return sendRequest(`${BASE_URL}/find/ids/${targetUserId}/requser`);
 }
 
-export function removeFollowing(targetUserId) {
-  return sendRequest(`${BASE_URL}/delete/target/${targetUserId}`, "DELETE");
+export function removeFollowing(followingDetails) {
+  return sendRequest(`${BASE_URL}/delete`, "DELETE", followingDetails);
 }

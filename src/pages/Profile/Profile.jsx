@@ -8,8 +8,8 @@ import * as postsAPI from '../../utilities/posts-api.js';
 import * as followingsAPI from '../../utilities/followings-api.js';
 import BackButton from '../../components/BackButton/BackButton.jsx';
 
-export default function Profile() {
-  const [user, setUser] = useState(getUser());
+export default function Profile({ user }) {
+  // const [user, setUser] = useState(getUser());
   const [profileUser, setProfileUser] = useState({});
   const [posts, setPosts] = useState([]);
   const { handle } = useParams();
@@ -18,40 +18,42 @@ export default function Profile() {
   const [validateFollow, setValidateFollow] = useState({ isUser: false, isFollow: false });
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const getFollows = async () => {
-      const followings = await followingsAPI.findByFollowingUser(profileUser._id);
-      setFollowings(followings);
+  // useEffect(() => {
+  //   const getFollows = async (profileUserId) => {
+  //     const followings = await followingsAPI.findByFollowingUser(profileUserId);
+  //     setFollowings(followings);
 
-      const followers = await followingsAPI.findByTargetUser(profileUser._id);
-      setFollowers(followers);
+  //     const followers = await followingsAPI.findByTargetUser(profileUserId);
+  //     setFollowers(followers);
 
-      console.log('followings', followings, 'followers', followers)
-    };
+  //     console.log('followings', followings, 'followers', followers)
+  //   };
 
-    const checkFollowing = async () => {
-      const checkIsUser = await user._id === profileUser._id;
-      console.log('check is user', checkIsUser)
-      if (!checkIsUser) {
-        const data = await followingsAPI.findByUsers(profileUser._id);
-        console.log('check data', data)
-        if (data.length > 0) {
-          setValidateFollow({...validateFollow, isFollow: true })
-        }
-        return;
-      }
+  //   const checkFollowing = async (profileUserId) => {
+  //     const checkIsUser = await user._id === profileUserId;
+  //     console.log('check is user', checkIsUser)
+  //     if (!checkIsUser) {
+  //       const data = await followingsAPI.findByUsers(profileUserId);
+  //       console.log('check data', data)
+  //       if (data.length > 0) {
+  //         setValidateFollow({...validateFollow, isFollow: true })
+  //       }
+  //       return;
+  //     }
       
-      setValidateFollow({...validateFollow, isUser: true});
-    }
+  //     setValidateFollow({...validateFollow, isUser: true});
+  //   }
 
-    checkFollowing();
-    getFollows();
-  }, [profileUser])
+  //   checkFollowing(profileUser._id);
+  //   getFollows(profileUser._id);
+  // }, [profileUser])
 
   useEffect(() => {
     const getProfileData = async () => {
-      const data = await usersAPI.findByUsername(handle);
-      setProfileUser(data);
+      const thisProfileUser = await usersAPI.findByUsername(handle);
+      setProfileUser(thisProfileUser);
+      checkFollowing(thisProfileUser._id);
+      getFollows(thisProfileUser._id);
 
       const posts = await postsAPI.findByUsername(handle);
       setPosts(posts);
@@ -60,9 +62,33 @@ export default function Profile() {
     getProfileData();
   }, [])
 
+  const getFollows = async (profileUserId) => {
+    const followings = await followingsAPI.findByFollowingUser(profileUserId);
+    setFollowings(followings);
+
+    const followers = await followingsAPI.findByTargetUser(profileUserId);
+    setFollowers(followers);
+  };
+
+  const checkFollowing = async (profileUserId) => {
+    const checkIsUser = await user._id === profileUserId;
+    console.log('check is user', checkIsUser)
+    if (!checkIsUser) {
+      const following = await followingsAPI.findByUsers(profileUserId);
+      console.log('check data', following)
+      if (following) {
+        setValidateFollow({...validateFollow, isFollow: true })
+      }
+      return;
+    }
+    
+    setValidateFollow({...validateFollow, isUser: true});
+  }
+
   function handleFollow() {
     try {
-      followingsAPI.createFollowing(profileUser._id);
+      followingsAPI.createFollowing({targetUser: profileUser._id});
+      getFollows(profileUser._id);
       setValidateFollow({...validateFollow, isFollow: true })
     } catch (error) {
       setError("Could not follow user");
@@ -71,7 +97,8 @@ export default function Profile() {
 
   function handleUnfollow() {
     try {
-      followingsAPI.removeFollowing(profileUser._id);
+      followingsAPI.removeFollowing({targetUser: profileUser._id});
+      getFollows(profileUser._id);
       setValidateFollow({...validateFollow, isFollow: false })
     } catch (error) {
       setError("Could not unfollow user");
