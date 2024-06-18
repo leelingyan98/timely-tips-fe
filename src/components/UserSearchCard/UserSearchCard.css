@@ -1,9 +1,14 @@
-.post-container {
-    width: 500px;
+.user-card {
+    display: flex;
+    justify-content: flex-start;
     border: 1px solid black;
+    padding: 10px 20px;
 }
 
-/* .bottom-row {
-    display: flex;
-    justify-content: space-between;
-} */
+.user-card p {
+    margin: 0;
+}
+
+.user-card .profile-picture {
+    width: 64px;
+}

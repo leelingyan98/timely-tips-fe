@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { findByTargetUsername } from '../../utilities/followings-api.js';
+import FollowUserCard from '../../components/FollowUserCard/FollowUserCard.jsx';
 
 export default function ProfileFollowers() {
   const { handle } = useParams();
@@ -9,7 +10,6 @@ export default function ProfileFollowers() {
   useEffect(() => {
     const getFollowers = async () => {
       const data = await findByTargetUsername(handle);
-      console.log(data)
       setFollowers(data);
     };
     getFollowers();
@@ -32,7 +32,7 @@ export default function ProfileFollowers() {
           ))}
         </>
         :
-        "Not followers yet..."
+        "No followers yet..."
       }
     </>
   )

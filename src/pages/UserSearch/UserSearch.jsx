@@ -35,7 +35,7 @@ export default function UserSearch() {
       { searchResults.length > 0 ? 
         <ul className="user-search">
           {searchResults.map((user) => (
-          <li key={user._id}><UserSearchCard username={user.username} displayName={user.displayName} /></li>
+          <li key={user._id}><UserSearchCard userResult={user} /></li>
         ))}
         </ul>
       :
