@@ -4,7 +4,7 @@ import * as postsAPI from '../../utilities/posts-api.js';
 import BackButton from '../../components/BackButton/BackButton';
 import Post from '../../components/Post/Post';
 
-export default function SinglePost({ user }) {
+export default function SinglePost({ user, setUser }) {
   const [post, setPost] = useState();
   const { id } = useParams();
 
@@ -20,7 +20,12 @@ export default function SinglePost({ user }) {
     <>
       <BackButton />
       { post ?
-        <Post user={user} postData={post} singlePost={true} />
+        <Post
+          user={user}
+          setUser={setUser}
+          postData={post}
+          singlePost={true}
+        />
         : "Loading..."
       }
     </>

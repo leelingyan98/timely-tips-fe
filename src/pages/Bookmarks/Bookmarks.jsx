@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Post from '../../components/Post/Post'
 
-export default function Bookmarks() {
+export default function Bookmarks({ user, setUser }) {
   return (
     <>
       <div>

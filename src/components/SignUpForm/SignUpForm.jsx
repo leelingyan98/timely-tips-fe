@@ -21,15 +21,12 @@ export default function SignUpForm({ setUser }) {
       ...userData,
       [evt.target.name]: evt.target.value,
     });
-    console.log('user Data', userData);
   };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      console.log('submit user Data', userData);
       const user = await signUp(userData);
-      console.log(user);
       setUser(user);
       if (user && !user.error) {
         navigate("/home");

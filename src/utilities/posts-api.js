@@ -28,6 +28,14 @@ export function findByUsername(username) {
   return sendRequest(`${BASE_URL}/find/username/${username}`);
 }
 
+export function bookmark(postId) {
+  return sendRequest(`${BASE_URL}/bookmark/${postId}`, "PATCH");
+}
+
+export function removeBookmark(postId) {
+  return sendRequest(`${BASE_URL}/bookmark/remove/${postId}`, "PATCH");
+}
+
 export function removePost(postId) {
   return sendRequest(`${BASE_URL}/delete/id/${postId}`, "DELETE");
 }

@@ -4,7 +4,7 @@ import CreatePostForm from '../../components/CreatePostForm/CreatePostForm'
 import './Home.css';
 import * as postsAPI from '../../utilities/posts-api.js';
 
-export default function Home({ user }) {
+export default function Home({ user, setUser }) {
   const [filterPost, setFilterPost] = useState('recent');
   const [posts, setPosts] = useState([]);
 
@@ -37,11 +37,11 @@ export default function Home({ user }) {
         <span id="following" onClick={changeFilter}>Following</span></p>
       { filterPost === 'recent' ?
         <>
-          {"Recent"}
+          <h2>Recent</h2>
         </>
         :
         <>
-          {"Following"}
+          <h2>Following</h2>
         </>
       }
       {posts.length > 0 ?
@@ -50,6 +50,7 @@ export default function Home({ user }) {
             <div key={post._id}>
               <Post
                 user={user}
+                setUser={setUser}
                 postData={post}
                 singlePost={false}
               />
@@ -57,7 +58,7 @@ export default function Home({ user }) {
           ))}
         </>
         :
-        "No tips yet"
+        <p>"No tips yet"</p>
       }
     </div>
   )

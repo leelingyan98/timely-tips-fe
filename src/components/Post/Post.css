@@ -6,6 +6,9 @@
 .top-row, .bottom-row {
     display: flex;
     justify-content: space-between;
+}
+
+.bottom-row {
     align-items: center;
 }
 

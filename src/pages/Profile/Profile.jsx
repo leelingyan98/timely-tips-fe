@@ -8,8 +8,7 @@ import * as postsAPI from '../../utilities/posts-api.js';
 import * as followingsAPI from '../../utilities/followings-api.js';
 import BackButton from '../../components/BackButton/BackButton.jsx';
 
-export default function Profile({ user }) {
-  // const [user, setUser] = useState(getUser());
+export default function Profile({ user, setUser }) {
   const [profileUser, setProfileUser] = useState({});
   const [posts, setPosts] = useState([]);
   const { handle } = useParams();
@@ -17,36 +16,6 @@ export default function Profile({ user }) {
   const [followers, setFollowers] = useState([]);
   const [validateFollow, setValidateFollow] = useState({ isUser: false, isFollow: false });
   const [error, setError] = useState("");
-
-  // useEffect(() => {
-  //   const getFollows = async (profileUserId) => {
-  //     const followings = await followingsAPI.findByFollowingUser(profileUserId);
-  //     setFollowings(followings);
-
-  //     const followers = await followingsAPI.findByTargetUser(profileUserId);
-  //     setFollowers(followers);
-
-  //     console.log('followings', followings, 'followers', followers)
-  //   };
-
-  //   const checkFollowing = async (profileUserId) => {
-  //     const checkIsUser = await user._id === profileUserId;
-  //     console.log('check is user', checkIsUser)
-  //     if (!checkIsUser) {
-  //       const data = await followingsAPI.findByUsers(profileUserId);
-  //       console.log('check data', data)
-  //       if (data.length > 0) {
-  //         setValidateFollow({...validateFollow, isFollow: true })
-  //       }
-  //       return;
-  //     }
-      
-  //     setValidateFollow({...validateFollow, isUser: true});
-  //   }
-
-  //   checkFollowing(profileUser._id);
-  //   getFollows(profileUser._id);
-  // }, [profileUser])
 
   useEffect(() => {
     const getProfileData = async () => {

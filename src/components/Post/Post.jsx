@@ -6,10 +6,16 @@ import * as commentsAPI from '../../utilities/comments-api.js';
 import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm';
 import CommentCard from '../../components/CommentCard/CommentCard';
 import { formatTimeAgo } from "../../utilities/common.js";
+import Bookmark from '../Bookmark/Bookmark.jsx';
 
-export default function Post({ user, postData, singlePost }) {
+export default function Post({ user, setUser, postData, singlePost }) {
   const [postUser, setPostUser] = useState({});
   const [comments, setComments] = useState([]);
+  const [validateActions, setValidateActions] = useState({
+    bookmarked: false,
+    liked: false,
+    owner: false,
+  });
 
   useEffect(() => {
     const getPostData = async () => {
@@ -20,6 +26,11 @@ export default function Post({ user, postData, singlePost }) {
       setComments(commentsData);
     }
     getPostData();
+
+    // Define post actions
+    const postBookmarked = user.bookmarks.includes(postData._id);
+    console.log('user bookmarks', user, 'check if bookmarked', postBookmarked)
+    setValidateActions({...validateActions, bookmarked: postBookmarked});
   }, [postData])
 
   return (
@@ -50,7 +61,12 @@ export default function Post({ user, postData, singlePost }) {
           </div>
           <div className="actions">
             <button>xx Like</button>
-            <button>Save</button>
+            <Bookmark
+              setUser={setUser}
+              validateActions={validateActions}
+              setValidateActions={setValidateActions}
+              postId={postData._id}
+            />
             <button>...</button>
           </div>
         </div>
