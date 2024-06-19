@@ -28,7 +28,13 @@ export default function Profile({ user, setUser }) {
       setPosts(posts);
     }
 
+    const getAllUserData = async () => {
+      const userData = await usersAPI.findByUserId(user._id);
+      setUser(userData);
+    }
+
     getProfileData();
+    getAllUserData();
   }, [handle])
 
   const getFollows = async (profileUserId) => {
@@ -98,7 +104,7 @@ export default function Profile({ user, setUser }) {
               </p>
               <p>{posts.length} tips shared</p>
               { validateFollow.isUser ?
-                <button>Edit profile</button>
+                <Link to={`/profile/edit`}><button>Edit profile</button></Link>
               : 
               <>
                 { validateFollow.isFollow ?

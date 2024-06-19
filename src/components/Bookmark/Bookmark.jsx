@@ -1,11 +1,9 @@
-import { getUser } from '../../utilities/users-service.js';
 import * as postsAPI from '../../utilities/posts-api.js';
 
-export default function Bookmark({ setUser, validateActions, setValidateActions, postId }) {    
+export default function Bookmark({ validateActions, setValidateActions, postId }) {    
       function handleBookmark() {
         try {
           postsAPI.bookmark(postId);
-          setUser(getUser());
           setValidateActions({...validateActions, bookmarked: true });
         } catch (error) {
           console.error(error);
@@ -15,7 +13,6 @@ export default function Bookmark({ setUser, validateActions, setValidateActions,
       function handleRemoveBookmark() {
         try {
             postsAPI.removeBookmark(postId);
-            setUser(getUser())
             setValidateActions({...validateActions, bookmarked: false });
         } catch (error) {
             console.error(error);
@@ -24,11 +21,11 @@ export default function Bookmark({ setUser, validateActions, setValidateActions,
 
     return (
         <>
-            {validateActions.bookmarked ?
+          {validateActions.bookmarked ?
             <button onClick={handleRemoveBookmark}>Unsave</button>
             :
             <button onClick={handleBookmark}>Save</button>
-            }
+          }
         </>
     )
 }

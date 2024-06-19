@@ -32,6 +32,10 @@ export function search(searchTerm) {
   return sendRequest(`${BASE_URL}/search/${searchTerm}`)
 }
 
+export function updateUser(userDetails) {
+  return sendRequest(`${BASE_URL}/update/details`, "PATCH", userDetails);
+}
+
 export function removeUser(userId) {
   return sendRequest(`${BASE_URL}/delete/id/${userId}`, "DELETE");
 }

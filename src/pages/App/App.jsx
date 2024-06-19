@@ -11,6 +11,7 @@ import UserSearch from '../UserSearch/UserSearch.jsx';
 import Profile from '../Profile/Profile'
 import SinglePost from '../SinglePost/SinglePost'
 import LoginPage from '../LoginPage/LoginPage';
+import ProfileEdit from '../ProfileEdit/ProfileEdit.jsx';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -25,6 +26,7 @@ function App() {
               <Route path="/home" element={<Home user={user} setUser={setUser} />} />
               <Route path="/bookmarks" element={<Bookmarks user={user} setUser={setUser} />} />
               <Route path="/search" element={<UserSearch />} />
+              <Route path="/profile/edit" element={<ProfileEdit user={user} />} />
               <Route path="/profile/:handle" element={<Profile user={user} setUser={setUser} />} />
               <Route path="/profile/:handle/following" element={<ProfileFollowings />} />
               <Route path="/profile/:handle/followers" element={<ProfileFollowers />} />

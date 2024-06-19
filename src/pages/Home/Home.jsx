@@ -4,7 +4,6 @@ import CreatePostForm from '../../components/CreatePostForm/CreatePostForm'
 import './Home.css';
 import * as usersAPI from '../../utilities/users-api.js';
 import * as postsAPI from '../../utilities/posts-api.js';
-import { Tabs } from "flowbite-react";
 
 export default function Home({ user, setUser }) {
   const [filterPost, setFilterPost] = useState('recent');
@@ -18,7 +17,6 @@ export default function Home({ user, setUser }) {
 
     const getAllUserData = async () => {
       const userData = await usersAPI.findByUserId(user._id);
-      console.log('user data', userData);
       setUser(userData);
     }
     getAllUserData();
