@@ -29,7 +29,6 @@ export default function Post({ user, setUser, postData, singlePost }) {
 
     // Define post actions
     const postBookmarked = user.bookmarks.includes(postData._id);
-    console.log('user bookmarks', user, 'check if bookmarked', postBookmarked)
     setValidateActions({...validateActions, bookmarked: postBookmarked});
   }, [postData])
 
