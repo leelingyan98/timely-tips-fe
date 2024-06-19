@@ -1,16 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #root {
-  max-width: 1280px;
+  width: 960px;
   margin: 0 auto;
   padding: 2rem;
+  display:flex;
+  justify-content: flex-start;
+  /* align-items: center; */
   text-align: center;
 }
 
 .container {
+  margin-top: 100px;
   display: flex;
   flex-flow: column wrap;
   width: 100%;
-  border: 1px solid black;
-  justify-content: center;
+  justify-content: stretch;
   align-items: center;
   padding: 10px 20px;
 }

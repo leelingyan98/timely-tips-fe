@@ -33,7 +33,7 @@ export default function CreateCommentForm({ postObj }) {
           name="content"
           rows="4"
           cols="50"
-          maxLength="500"
+          maxLength="300"
           placeholder="Write your comment..."
           value={commentDetails.content}
           onChange={handleChange}
@@ -41,7 +41,7 @@ export default function CreateCommentForm({ postObj }) {
         >
         </textarea>
         <div className="bottom-row">
-          <p>{commentDetails.content.length}/500 characters</p>
+          <p>{commentDetails.content.length}/300 characters</p>
           <input className="submit-btn" type="submit" value="Comment" />
         </div>
       </form>

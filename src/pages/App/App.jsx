@@ -17,27 +17,25 @@ function App() {
 
   return (
     <>
-      <div>
-        <div className="container">
-          { user ?
-            <>
-              <NavBar user={user} setUser={setUser} />
-              <Routes>
-                <Route path="/home" element={<Home user={user} setUser={setUser} />} />
-                <Route path="/bookmarks" element={<Bookmarks user={user} setUser={setUser} />} />
-                <Route path="/search" element={<UserSearch />} />
-                <Route path="/profile/:handle" element={<Profile user={user} setUser={setUser} />} />
-                <Route path="/profile/:handle/following" element={<ProfileFollowings />} />
-                <Route path="/profile/:handle/followers" element={<ProfileFollowers />} />
-                <Route path="/post/:id" element={<SinglePost user={user} setUser={setUser} />} />
-                <Route path="*" element={<Navigate to="/home" replace />} />
-              </Routes>
-            </>
-            :
-            <LoginPage setUser={setUser} />
-          }
-          
-        </div>
+      <div className="container">
+        {user ?
+          <>
+            <NavBar user={user} setUser={setUser} />
+            <Routes>
+              <Route path="/home" element={<Home user={user} setUser={setUser} />} />
+              <Route path="/bookmarks" element={<Bookmarks user={user} setUser={setUser} />} />
+              <Route path="/search" element={<UserSearch />} />
+              <Route path="/profile/:handle" element={<Profile user={user} setUser={setUser} />} />
+              <Route path="/profile/:handle/following" element={<ProfileFollowings />} />
+              <Route path="/profile/:handle/followers" element={<ProfileFollowers />} />
+              <Route path="/post/:id" element={<SinglePost user={user} setUser={setUser} />} />
+              <Route path="*" element={<Navigate to="/home" replace />} />
+            </Routes>
+          </>
+          :
+          <LoginPage setUser={setUser} />
+        }
+
       </div>
     </>
   )

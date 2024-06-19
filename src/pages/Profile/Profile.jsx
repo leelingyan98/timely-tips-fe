@@ -29,7 +29,7 @@ export default function Profile({ user, setUser }) {
     }
 
     getProfileData();
-  }, [])
+  }, [handle])
 
   const getFollows = async (profileUserId) => {
     const followings = await followingsAPI.findByFollowingUser(profileUserId);
@@ -76,7 +76,9 @@ export default function Profile({ user, setUser }) {
 
   return (
     <>
-      <BackButton />
+      <div className="self-start">
+        <BackButton className="self-start" />
+      </div>
       {profileUser ?
         <div className="profile-container">
           <div className="about">

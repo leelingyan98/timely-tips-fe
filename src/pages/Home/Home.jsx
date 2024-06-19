@@ -3,6 +3,7 @@ import Post from '../../components/Post/Post'
 import CreatePostForm from '../../components/CreatePostForm/CreatePostForm'
 import './Home.css';
 import * as postsAPI from '../../utilities/posts-api.js';
+import { Tabs } from "flowbite-react";
 
 export default function Home({ user, setUser }) {
   const [filterPost, setFilterPost] = useState('recent');
@@ -21,20 +22,22 @@ export default function Home({ user, setUser }) {
       setFilterPost("recent");
       document.getElementById('following').classList.remove("active");
       evt.target.classList.add("active");
+      console.log('recent', filterPost)
     } else {
       setFilterPost("following")
       document.getElementById('recent').classList.remove("active")
       evt.target.classList.add("active");
+      console.log('follow', filterPost)
     }
   }
 
   return (
     <div>
       <CreatePostForm user={user} />
-      <p>
-        <span className="active" id="recent" onClick={changeFilter}>Recent</span>
-        &nbsp;|&nbsp;
-        <span id="following" onClick={changeFilter}>Following</span></p>
+      <div className="filter-tabs">
+        <button className="active" id="recent" onClick={changeFilter}>Recent</button>
+        <button id="following" onClick={changeFilter}>Following</button>
+      </div>
       { filterPost === 'recent' ?
         <>
           <h2>Recent</h2>
@@ -47,7 +50,7 @@ export default function Home({ user, setUser }) {
       {posts.length > 0 ?
         <>
           {posts.map((post) => (
-            <div key={post._id}>
+            <div className="self-stretch w-full" key={post._id}>
               <Post
                 user={user}
                 setUser={setUser}

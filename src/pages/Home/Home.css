@@ -2,8 +2,30 @@ span {
     cursor: pointer;
 }
 
-.active {
-    font-weight: bold;
-    cursor: context-menu;
+.filter-tabs button {
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    border-color: var(--color-secondary);
 }
 
+.filter-tabs button:hover {
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    border-bottom: 3px solid var(--color-secondary);
+}
+
+.filter-tabs button:focus {
+    outline: none;
+}
+
+.filter-tabs .active {
+    font-weight: bold;
+    cursor: context-menu;
+    border-bottom: 3px solid var(--color-secondary);
+}
+
+.filter-tabs .active {
+    pointer-events:none;
+}

@@ -96,7 +96,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
           :
           <>
             <div className="bottom-row">
-              <button><Link to={`/post/${postData._id}`}>View Post</Link></button>
+              <Link to={`/post/${postData._id}`}><button>View Post</button></Link>
               <div className="comments-count">
               {comments.length} comments
               </div>

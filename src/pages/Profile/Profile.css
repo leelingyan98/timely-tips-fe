@@ -1,7 +1,16 @@
+.profile-container {
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
 .about {
     display: flex;
     flex-wrap: wrap;
     padding: 15px 10px;
+    width: 100%;
 }
 
 .profile-picture {
@@ -10,7 +19,7 @@
 }
 
 .profile-picture img {
-    border-radius: 99px;
+    border-radius: 100%;
     width: 100%;
 }
 
@@ -22,4 +31,11 @@
     display: flex;
     flex-flow: column;
     align-items: flex-start;
+}
+
+.posts { 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }

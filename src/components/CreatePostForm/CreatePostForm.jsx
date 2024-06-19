@@ -4,6 +4,7 @@ import * as postsAPI from '../../utilities/posts-api';
 
 export default function CreatePostForm({ user }) {
   const [postDetails, setPostDetails] = useState({ userid: user._id, content: '', files: null });
+  const [file, setFile] = useState([]);
   const [validatePostForm, setValidatePostForm] = useState({});
   const [error, setError] = useState("");
 
@@ -53,15 +54,14 @@ return (
         name="content"
         rows="4"
         cols="50"
-        maxLength="500"
+        maxLength="300"
         placeholder="Type your text here..."
         value={postDetails.content}
         onChange={handleChange}
         required
       >
       </textarea>
-      <div className="bottom-row">
-        <label htmlFor="photo">Upload a photo</label>
+      <label htmlFor="photo">Upload a photo</label>
         <input
           type="file"
           id="photo"
@@ -69,7 +69,8 @@ return (
           accept="image/*"
           onChange={handleChange}
         />
-        <p>{postDetails.content.length}/500 characters</p>
+      <div className="bottom-row">
+        <p>{postDetails.content.length}/300 characters</p>
         <input className="submit-btn" type="submit" value="Post" />
       </div>
     </form>
