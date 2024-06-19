@@ -1,5 +1,6 @@
 .login-page {
   height: 100%;
+  margin-top: -50px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -11,4 +12,16 @@
   margin-top: 4vmin;
   text-align: center;
   cursor: pointer;
+}
+
+.form-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
+.link {
+  color: var(--color-primary);
 }

@@ -4,6 +4,7 @@ import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './NavBar.css'
+import { logOut } from "../../utilities/users-service";
 
 export default function NavBar({ user, setUser }) {
   function handleLogOut() {
@@ -27,15 +28,21 @@ export default function NavBar({ user, setUser }) {
           <Dropdown.Header>
             <span className="block text-sm">{`@${user.username}`}</span>
           </Dropdown.Header>
-          <Dropdown.Item><Link to={`/profile/${user.username}`}>Profile</Link></Dropdown.Item>
+          <Link to={`/profile/${user.username}`}>
+            <Dropdown.Item>Profile</Dropdown.Item>
+          </Link>
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link className="text-lg"><Link to="/bookmarks">Bookmarks</Link></Navbar.Link>
-        <Navbar.Link className="text-lg"><Link to="/search">Search</Link></Navbar.Link>
+        <Link to="/bookmarks">
+          <Navbar.Link className="text-lg">Bookmarks</Navbar.Link>
+        </Link>
+        <Link to="/search">
+          <Navbar.Link className="text-lg">Search</Navbar.Link>
+        </Link>
       </Navbar.Collapse>
     </Navbar>
   )
