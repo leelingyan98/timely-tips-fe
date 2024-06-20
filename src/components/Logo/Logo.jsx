@@ -1,5 +1,5 @@
 import './Logo.css';
-import icon from '../../../public/plant-cloud-svgrepo-com.svg';
+import icon from '../../assets/plant-cloud-svgrepo-com.svg';
 
 export default function Logo() {
     return (
@@ -7,7 +7,7 @@ export default function Logo() {
             <div className="icon">
                 <img src={icon} />
             </div>
-            <p class="app-name">Timely Tips</p>
+            <p className="app-name">Timely Tips</p>
         </div>
     )
 }
