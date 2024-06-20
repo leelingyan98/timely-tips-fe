@@ -93,17 +93,19 @@ export default function Profile({ user, setUser }) {
               <img src={`${profileUser.profilePicture.url}`} />
             </div>
             <div className="profile-details">
-              <h2>{`@${profileUser.username}`}</h2>
-              {profileUser.displayName ?
-                <p>{profileUser.displayName}</p>
+              <p>
+                <span className="text-xl font-bold">{`@${profileUser.username}`}</span>
+                {profileUser.displayName ?
+                <span> {profileUser.displayName}</span>
                 : null
-              }
+                }
+              </p>
               <p>
                 <Link to={`/profile/${profileUser.username}/following`}>{followings.length} Following</Link>
                 &nbsp;|&nbsp;
                 <Link to={`/profile/${profileUser.username}/followers`}>{followers.length} Followers</Link>
               </p>
-              <p>{posts.length} tips shared</p>
+              <p>{posts.length} {"tip(s)"} shared</p>
               { validateFollow.isUser ?
                 <Link to={`/profile/edit`}><button>Edit profile</button></Link>
               : 

@@ -37,7 +37,7 @@ export default function Bookmarks({ user, setUser }) {
   return (
     <>
       <div>
-        <p>Bookmarks Page</p>
+        <h2>Your bookmarks</h2>
         {posts ?
         <>
         {posts.length > 0 ?
@@ -54,10 +54,10 @@ export default function Bookmarks({ user, setUser }) {
             ))}
           </>
           :
-          <p>No bookmarks</p>
+          <p>No bookmarks yet</p>
           }
         </>
-        : "Loading..."
+        : <p>No bookmarks yet</p>
       }
       </div>
     </>

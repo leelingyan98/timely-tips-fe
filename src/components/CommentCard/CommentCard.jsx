@@ -25,7 +25,10 @@ export default function CommentCard({ commentData }) {
                   <img src={`${commentUser.profilePicture.url}`} />
                 </div>
                 <div className="text">
-                    <div><Link to={`/profile/${commentUser.username}`}>@{commentUser.username}</Link> {formatTimeAgo(commentData.createdAt)}</div>
+                    <div>
+                        <Link className="font-bold" to={`/profile/${commentUser.username}`}>@{commentUser.username}</Link>
+                        <span className="text-sm"> {formatTimeAgo(commentData.createdAt)}</span>
+                    </div>
                     <div className="content">{commentData.content}</div>
                 </div>      
             </div>

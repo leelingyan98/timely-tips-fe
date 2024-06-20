@@ -84,15 +84,15 @@ export default function Post({ user, setUser, postData, singlePost }) {
                   <img src={`${postUser.profilePicture.url}`} />
                 </div>
                 <div className="post-creator-name">
+                  <Link to={`/profile/${postUser.username}`}>
+                    <span className="handle font-bold text-lg">@{postUser.username}</span>
+                  </Link>
                   {postUser.displayName ?
                     <span className="display-name">{postUser.displayName}</span>
                     :
                     null
                   }
-                  <Link to={`/profile/${postUser.username}`}>
-                    <span className="handle">@{postUser.username}</span>
-                  </Link>
-                  <div>{formatTimeAgo(postData.createdAt)}</div>
+                  <div className="text-sm">{formatTimeAgo(postData.createdAt)}</div>
                 </div>
               </>
               :
@@ -129,8 +129,8 @@ export default function Post({ user, setUser, postData, singlePost }) {
         {singlePost ?
           <>
             <CreateCommentForm postObj={postData._id} />
-            <div className="bottom-row comments-count">
-              {comments ? comments.length : 0} comments
+            <div className="bottom-row comments-count mb-3">
+              {comments ? comments.length : 0} {"comment(s)"}
             </div>
             {comments ?
               <>
@@ -148,7 +148,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
             <div className="bottom-row mt-5">
               <Link to={`/post/${postData._id}`}><button>View Post</button></Link>
               <div className="comments-count">
-              {comments ? comments.length : 0} comments
+              {comments ? comments.length : 0} {"comment(s)"}
               </div>
             </div>
           </>

@@ -8,10 +8,10 @@ export default function UserSearchCard({ userResult }) {
       <Link to={`/profile/${userResult.username}`}>
         <div className="user-card">
           <div className="profile-picture">
-            <img src={userResult.profilePicture} />
+            <img src={userResult.profilePicture.url} />
           </div>
           <div className="user-info">
-            <p>@{userResult.username}</p>
+            <p className="font-bold">@{userResult.username}</p>
             {userResult.displayName ?
             <p>{userResult.displayName}</p>
             : null
