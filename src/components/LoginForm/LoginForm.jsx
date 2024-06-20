@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/users-service.js';
+import { Label, TextInput, Button } from "flowbite-react";
+import { HiMail } from "react-icons/hi";
+import { KeyIcon } from "@heroicons/react/24/solid"
 
 export default function LoginForm({ setUser, showLogin, setShowLogin }) {
   const [credentials, setCredentials] = useState({
@@ -37,11 +40,19 @@ export default function LoginForm({ setUser, showLogin, setShowLogin }) {
       </p>
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
-          <label>Email</label> <br />
-          <input type="text" name="email" value={credentials.email} onChange={handleChange} required /><br />
-          <label>Password</label> <br />
-          <input type="password" name="password" value={credentials.password} onChange={handleChange} required /><br />
-          <button type="submit">LOG IN</button>
+          <Label htmlFor="email" value="Email address" />
+          <TextInput
+            type="email" name="email" icon={HiMail}
+            value={credentials.email} onChange={handleChange}
+            required
+          />
+          <Label htmlFor="password" value="Password" />
+          <TextInput
+            type="password" name="password" icon={KeyIcon}
+            value={credentials.password} onChange={handleChange}
+            required
+          />
+          <Button type="submit" className="text-primary">Log in</Button>
         </form>
       </div>
       <p className="error-message">&nbsp;{error}</p>

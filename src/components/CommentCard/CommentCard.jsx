@@ -5,7 +5,7 @@ import { formatTimeAgo } from "../../utilities/common.js";
 import "./CommentCard.css"
 
 export default function CommentCard({ commentData }) {
-    const [commentUser, setCommentUser] = useState({});
+    const [commentUser, setCommentUser] = useState();
 
     useEffect(() => {
         const getUserData = async () => {
@@ -14,19 +14,25 @@ export default function CommentCard({ commentData }) {
             setCommentUser(userData);
         };
         getUserData();
-    }, []);
+    }, [commentData]);
 
     return (
         <>
+         { commentUser ?
+            <>
             <div className="comments">
                 <div className="display-picture">
-                  <img src={`${commentUser.profilePicture}`} />
+                  <img src={`${commentUser.profilePicture.url}`} />
                 </div>
                 <div className="text">
                     <div><Link to={`/profile/${commentUser.username}`}>@{commentUser.username}</Link> {formatTimeAgo(commentData.createdAt)}</div>
                     <div className="content">{commentData.content}</div>
                 </div>      
             </div>
+        </>
+        :
+        'Loading...'
+        }
         </>
     )
 }

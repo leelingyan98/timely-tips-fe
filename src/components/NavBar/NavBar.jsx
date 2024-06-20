@@ -22,7 +22,7 @@ export default function NavBar({ user, setUser }) {
           arrowIcon={false}
           inline
           label={
-            <Avatar alt="User settings" img={`${user.profilePicture}`} rounded />
+            <Avatar alt="User settings" img={`${user.profilePicture.url}`} rounded />
           }
         >
           <Dropdown.Header>

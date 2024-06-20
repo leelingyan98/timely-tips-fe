@@ -9,7 +9,7 @@ import * as followingsAPI from '../../utilities/followings-api.js';
 import BackButton from '../../components/BackButton/BackButton.jsx';
 
 export default function Profile({ user, setUser }) {
-  const [profileUser, setProfileUser] = useState({});
+  const [profileUser, setProfileUser] = useState();
   const [posts, setPosts] = useState([]);
   const { handle } = useParams();
   const [followings, setFollowings] = useState([]);
@@ -30,6 +30,7 @@ export default function Profile({ user, setUser }) {
 
     const getAllUserData = async () => {
       const userData = await usersAPI.findByUserId(user._id);
+      console.log('userData', userData)
       setUser(userData);
     }
 
@@ -89,7 +90,7 @@ export default function Profile({ user, setUser }) {
         <div className="profile-container">
           <div className="about">
             <div className="profile-picture">
-              <img src={`${profileUser.profilePicture}`} />
+              <img src={`${profileUser.profilePicture.url}`} />
             </div>
             <div className="profile-details">
               <h2>{`@${profileUser.username}`}</h2>

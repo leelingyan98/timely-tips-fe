@@ -9,7 +9,7 @@ import { formatTimeAgo } from "../../utilities/common.js";
 import Bookmark from '../Bookmark/Bookmark.jsx';
 
 export default function Post({ user, setUser, postData, singlePost }) {
-  const [postUser, setPostUser] = useState({});
+  const [postUser, setPostUser] = useState();
   const [comments, setComments] = useState([]);
   const [validateActions, setValidateActions] = useState({
     bookmarked: false,
@@ -40,7 +40,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
             {postUser ?
               <>
                 <div className="display-picture">
-                  <img src={`${postUser.profilePicture}`} />
+                  <img src={`${postUser.profilePicture.url}`} />
                 </div>
                 <div className="post-creator-name">
                   {postUser.displayName ?
