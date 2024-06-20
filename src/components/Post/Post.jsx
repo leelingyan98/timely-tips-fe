@@ -30,14 +30,6 @@ export default function Post({ user, setUser, postData, singlePost }) {
       setComments(commentsData);
       
       await fetchPostLikes(postData._id);
-
-      // const userLiked = await postLikesAPI.findByPostIdLoggedUser(postData._id);
-      // if (userLiked) {
-      //   setValidateActions({
-      //     ...validateActions,
-      //     liked: true,
-      //   });
-      // }
     }
     getPostData();
 
@@ -124,7 +116,14 @@ export default function Post({ user, setUser, postData, singlePost }) {
         <p className="content my-5">
           {postData.content}
         </p>
-        <div className="photo">Post image here</div>
+        { postData.photo ? 
+          <>
+            <div className="photo">
+              <img src={postData.photo.url} />
+            </div>
+          </>
+          : null
+        }
 
         {singlePost ?
           <>

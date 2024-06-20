@@ -83,8 +83,8 @@ export default function Profile({ user, setUser }) {
 
   return (
     <>
-      <div className="self-start">
-        <BackButton className="self-start" />
+      <div className="justify-self-stretch">
+        <BackButton />
       </div>
       {profileUser ?
         <div className="profile-container">

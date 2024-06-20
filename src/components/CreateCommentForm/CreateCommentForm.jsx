@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import * as commentsAPI from '../../utilities/comments-api.js';
+import { Textarea } from "flowbite-react";
 
 export default function CreateCommentForm({ postObj }) {
   const [commentDetails, setCommentDetails] = useState({content: "", postId: postObj});
@@ -24,23 +25,18 @@ export default function CreateCommentForm({ postObj }) {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-container my-5">
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <textarea
-          id="content"
-          name="content"
-          rows="4"
-          cols="50"
-          maxLength="300"
-          placeholder="Write your comment..."
-          value={commentDetails.content}
-          onChange={handleChange}
+        <Textarea
+          id="content" name="content"
+          placeholder="Leave a comment..."
+          rows={4} cols={50} maxLength={300}
+          value={commentDetails.content} onChange={handleChange}
           required
-        >
-        </textarea>
-        <div className="bottom-row">
+        />
+        <div className="bottom-row mt-2">
           <p>{commentDetails.content.length}/300 characters</p>
-          <input className="submit-btn" type="submit" value="Comment" />
+          <button type="submit">Comment</button>
         </div>
       </form>
     </div>

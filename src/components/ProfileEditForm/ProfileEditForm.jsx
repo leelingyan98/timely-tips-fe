@@ -5,7 +5,11 @@ import { HiMail } from "react-icons/hi";
 import { UserCircleIcon } from "@heroicons/react/24/solid"
 
 export default function ProfileEditForm({ userData }) {
-  const [editForm, setEditForm] = useState({});
+  const [editForm, setEditForm] = useState({
+    username: userData.username,
+    email: userData.email,
+    displayName: userData.displayName,
+  });
   const [error, setError] = useState('');
   //   const disable = (userData.password !== userData.confirm);
 
@@ -36,23 +40,24 @@ export default function ProfileEditForm({ userData }) {
 
   return (
     <div>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form className="mt-3" autoComplete="off" onSubmit={handleSubmit}>
         <Label htmlFor="username" value="Username (handle) *" />
-        <TextInput
+        <TextInput className="mb-2"
           id="username" type="username" name="username" addon="@"
-          value={userData.username} onChange={handleChange}
+          value={editForm.username} onChange={handleChange}
+          maxLength={20}
           required
         />
         <Label htmlFor="email" value="Email address *" />
-        <TextInput
+        <TextInput className="mb-2"
           id="email" type="email" name="email" icon={HiMail}
-          value={userData.email} onChange={handleChange}
+          value={editForm.email} onChange={handleChange}
           required
         />
         <Label htmlFor="displayName" value="Display Name" />
-        <TextInput
+        <TextInput className="mb-2"
           id="displayName" type="displayName" name="displayName" icon={UserCircleIcon}
-          value={userData.displayName} onChange={handleChange}
+          value={editForm.displayName} onChange={handleChange}
           required
         />
         <Button type="submit" className="text-primary">Update profile</Button>

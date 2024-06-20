@@ -29,12 +29,12 @@ export default function PostLike(props) {
         : null
       }
       {validateActions.liked ?
-        <div className="cursor-pointer px-1 flex" onClick={handleRemovePostLike}>
-          <LikedIcon className="h-6 w-6" />
+        <div className="cursor-pointer px-1" onClick={handleRemovePostLike}>
+          <LikedIcon className="h-6 w-6 text-secondarydark hover:text-secondary" />
         </div>
         :
         <div className="cursor-pointer px-1" onClick={handlePostLike}>
-          <LikeIcon className="h-6 w-6" />
+          <LikeIcon className="h-6 w-6 hover:text-gray-500" />
         </div>
       }
     </>

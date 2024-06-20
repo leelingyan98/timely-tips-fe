@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import * as postsAPI from '../../utilities/posts-api';
+import { Textarea } from "flowbite-react";
 
 export default function CreatePostForm({ user }) {
   const [postDetails, setPostDetails] = useState({ userid: user._id, content: '', files: null });
-  const [file, setFile] = useState([]);
   const [error, setError] = useState("");
 
   function handleChange(evt) {
@@ -47,29 +47,27 @@ return (
   <div className="form-container justify-self-center">
     <h2>Share your tip..</h2>
     <form autoComplete="off" onSubmit={handleSubmit}>
-      <textarea
-        id="content"
-        name="content"
-        rows="4"
-        cols="50"
-        maxLength="300"
-        placeholder="Type your text here..."
-        value={postDetails.content}
-        onChange={handleChange}
+      <Textarea
+        id="content" name="content"
+        placeholder="Start writing your tip here! i.e. Here are 5 ways you can save money:"
+        rows={4} cols={50} maxLength={300}
+        value={postDetails.content} onChange={handleChange}
         required
-      >
-      </textarea>
-      <label htmlFor="photo">Upload a photo</label>
+      />
+      <label className="block my-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="photo">
+        Upload a photo {"(optional)"}
+      </label>
         <input
           type="file"
+          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
           id="photo"
           name="photo"
           accept="image/*"
           onChange={handleChange}
         />
-      <div className="bottom-row">
+      <div className="bottom-row mt-2">
         <p>{postDetails.content.length}/300 characters</p>
-        <input className="submit-btn" type="submit" value="Post" />
+        <button type="submit">Post</button>
       </div>
     </form>
     {error && <p className="error-message">{error}</p>}

@@ -55,6 +55,7 @@ export default function SignUpForm({ setUser, showLogin, setShowLogin }) {
         <TextInput
           id="username" type="text" name="username" addon="@"
           value={userData.username} onChange={handleChange}
+          maxLength={20}
           required
         />
         <Label htmlFor="email" value="Email Address *" />
@@ -67,12 +68,14 @@ export default function SignUpForm({ setUser, showLogin, setShowLogin }) {
           <TextInput
             type="password" name="password" icon={KeyIcon}
             value={userData.password} onChange={handleChange}
+            minLength={3}
             required
         />
         <Label htmlFor="confirm" value="Confirm Password *" />
         <TextInput
           type="password" name="confirm" icon={KeyIcon}
           value={userData.confirm} onChange={handleChange}
+          minLength={3}
           required
         />
         <Button type="submit" disabled={disable} className="text-primary">Sign up</Button>

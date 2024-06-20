@@ -5,6 +5,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './NavBar.css'
 import { logOut } from "../../utilities/users-service";
+import DropdownLinkItem from "../../assets/flowbite-custom/DropdownLinkItem";
+import NavbarLinkItem from "../../assets/flowbite-custom/NavbarLinkItem";
 
 export default function NavBar({ user, setUser }) {
   function handleLogOut() {
@@ -13,7 +15,7 @@ export default function NavBar({ user, setUser }) {
   }
 
   return (
-    <Navbar className="bg-primarylight dark:bg-primarydark" fluid rounded>
+    <Navbar className="bg-primarylight dark:bg-primarydark z-50" fluid rounded>
       <Navbar.Brand href="/" className="text-primary hover:text-primarydark">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Timely Tips</span>
       </Navbar.Brand>
@@ -28,16 +30,18 @@ export default function NavBar({ user, setUser }) {
           <Dropdown.Header>
             <span className="block text-sm">{`@${user.username}`}</span>
           </Dropdown.Header>
-            <Dropdown.Item><Link to={`/profile/${user.username}`}>Profile</Link></Dropdown.Item>
-            <Dropdown.Item><Link to="/profile/edit">Edit</Link></Dropdown.Item>
+            <DropdownLinkItem to={`/profile/${user.username}`}>Profile</DropdownLinkItem>
+            <DropdownLinkItem to="/profile/edit">Settings</DropdownLinkItem>
+            {/* <Dropdown.Item><Link to={`/profile/${user.username}`}>Profile</Link></Dropdown.Item>
+            <Dropdown.Item><Link to="/profile/edit">Edit</Link></Dropdown.Item> */}
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-          <Navbar.Link className="text-lg"><Link to="/bookmarks">Bookmarks</Link></Navbar.Link>
-          <Navbar.Link className="text-lg"><Link to="/search">Search</Link></Navbar.Link>
+          <NavbarLinkItem className="text-lg text-primary hover:text-primarydark" to="/bookmarks">Bookmarks</NavbarLinkItem>
+          <NavbarLinkItem className="text-lg text-primary hover:text-primarydark" to="/search">Search</NavbarLinkItem>
       </Navbar.Collapse>
     </Navbar>
   )

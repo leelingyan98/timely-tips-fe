@@ -12,8 +12,8 @@ export default function BackButton() {
 
     return (
         <>
-            <Button className="text-primary">
-                <HiOutlineArrowLeft className="h-5 w-5" onClick={previousPage}/>
+            <Button className="text-primary" onClick={previousPage}>
+                <HiOutlineArrowLeft className="h-5 w-5"/>
             </Button>
             {/* <button onClick={previousPage}>Go back</button> */}
         </>
