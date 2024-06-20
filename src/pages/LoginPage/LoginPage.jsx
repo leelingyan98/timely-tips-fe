@@ -11,7 +11,6 @@ export default function LoginPage({ setUser }) {
     <main className="login-page">
       <Logo />
       <h2 className="text-xl pt-2">Share and learn more about living in Singapore!</h2>
-      <br />
       {showLogin ?
         <LoginForm setUser={setUser} showLogin={showLogin} setShowLogin={setShowLogin} />
         :

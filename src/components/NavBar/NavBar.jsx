@@ -28,16 +28,16 @@ export default function NavBar({ user, setUser }) {
           <Dropdown.Header>
             <span className="block text-sm">{`@${user.username}`}</span>
           </Dropdown.Header>
-            <Dropdown.Item href={`/profile/${user.username}`}>Profile</Dropdown.Item>
-            <Dropdown.Item href="/profile/edit">Edit</Dropdown.Item>
+            <Dropdown.Item><Link to={`/profile/${user.username}`}>Profile</Link></Dropdown.Item>
+            <Dropdown.Item><Link to="/profile/edit">Edit</Link></Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-          <Navbar.Link className="text-lg" href="/bookmarks">Bookmarks</Navbar.Link>
-          <Navbar.Link className="text-lg" href="/search">Search</Navbar.Link>
+          <Navbar.Link className="text-lg"><Link to="/bookmarks">Bookmarks</Link></Navbar.Link>
+          <Navbar.Link className="text-lg"><Link to="/search">Search</Link></Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   )
