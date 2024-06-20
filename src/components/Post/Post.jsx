@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './Post.css'
 import * as usersAPI from '../../utilities/users-api.js';
 import * as commentsAPI from '../../utilities/comments-api.js';
+import * as postLikesAPI from '../../utilities/post-likes-api.js';
 import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm';
 import CommentCard from '../../components/CommentCard/CommentCard';
 import { formatTimeAgo } from "../../utilities/common.js";
@@ -12,7 +13,8 @@ import MoreActions from '../MoreActions/MoreActions.jsx';
 
 export default function Post({ user, setUser, postData, singlePost }) {
   const [postUser, setPostUser] = useState();
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState();
+  const [postLikes, setPostLikes] = useState();
   const [validateActions, setValidateActions] = useState({
     bookmarked: false,
     liked: false,
@@ -26,20 +28,50 @@ export default function Post({ user, setUser, postData, singlePost }) {
 
       const commentsData = await commentsAPI.findByPostId(postData._id);
       setComments(commentsData);
+      
+      await fetchPostLikes(postData._id);
+
+      // const userLiked = await postLikesAPI.findByPostIdLoggedUser(postData._id);
+      // if (userLiked) {
+      //   setValidateActions({
+      //     ...validateActions,
+      //     liked: true,
+      //   });
+      // }
     }
     getPostData();
 
     // Define post actions
     const postBookmarked = user.bookmarks.includes(postData._id);
     const postOwner = user._id === postData.user;
-    console.log('post Owner', postOwner)
+
     setValidateActions({
       ...validateActions,
       bookmarked: postBookmarked,
-      liked: false,
       owner: postOwner,
     });
   }, [postData])
+
+  useEffect(() => {
+    if (postLikes) {
+      for (let i = 0; i < postLikes.length; i++) {
+        const postLike = postLikes[i];
+        if (postLike.user === user._id) {
+          setValidateActions({
+            ...validateActions,
+            liked: true,
+          });
+          return;
+        }
+      }
+    }
+  }, [postLikes])
+
+  async function fetchPostLikes(currentPostId) {
+    const newLikes = await postLikesAPI.findByPostId(currentPostId);
+    setPostLikes(newLikes);
+  };
+  
 
   return (
     <>
@@ -67,12 +99,14 @@ export default function Post({ user, setUser, postData, singlePost }) {
               null
             }
           </div>
-          <div className="flex">
+          <div className="flex items-start">
             <PostLike 
-              setUser={setUser}
               validateActions={validateActions}
               setValidateActions={setValidateActions}
               postId={postData._id}
+              postLikes={postLikes}
+              setPostLikes={setPostLikes}
+              fetchPostLikes={fetchPostLikes}
             />
             <Bookmark
               setUser={setUser}
@@ -96,9 +130,9 @@ export default function Post({ user, setUser, postData, singlePost }) {
           <>
             <CreateCommentForm postObj={postData._id} />
             <div className="bottom-row comments-count">
-              {comments.length} comments
+              {comments ? comments.length : 0} comments
             </div>
-            {comments.length > 0 ?
+            {comments ?
               <>
                 {comments.map((comment) => (
                   <div key={comment._id}>
@@ -114,7 +148,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
             <div className="bottom-row">
               <Link to={`/post/${postData._id}`}><button>View Post</button></Link>
               <div className="comments-count">
-              {comments.length} comments
+              {comments ? comments.length : 0} comments
               </div>
             </div>
           </>
