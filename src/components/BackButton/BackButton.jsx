@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
+import { Button } from "flowbite-react";
+import { HiOutlineArrowLeft } from "react-icons/hi";
 
 export default function BackButton() {
     const navigate = useNavigate();
@@ -10,7 +12,10 @@ export default function BackButton() {
 
     return (
         <>
-            <button onClick={previousPage}>Go back</button>
+            <Button className="text-primary">
+                <HiOutlineArrowLeft className="h-5 w-5" onClick={previousPage}/>
+            </Button>
+            {/* <button onClick={previousPage}>Go back</button> */}
         </>
     )
 }

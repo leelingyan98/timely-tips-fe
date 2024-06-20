@@ -7,6 +7,8 @@ import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentF
 import CommentCard from '../../components/CommentCard/CommentCard';
 import { formatTimeAgo } from "../../utilities/common.js";
 import Bookmark from '../Bookmark/Bookmark.jsx';
+import PostLike from '../PostLike/PostLike.jsx';
+import MoreActions from '../MoreActions/MoreActions.jsx';
 
 export default function Post({ user, setUser, postData, singlePost }) {
   const [postUser, setPostUser] = useState();
@@ -29,7 +31,14 @@ export default function Post({ user, setUser, postData, singlePost }) {
 
     // Define post actions
     const postBookmarked = user.bookmarks.includes(postData._id);
-    setValidateActions({...validateActions, bookmarked: postBookmarked});
+    const postOwner = user._id === postData.user;
+    console.log('post Owner', postOwner)
+    setValidateActions({
+      ...validateActions,
+      bookmarked: postBookmarked,
+      liked: false,
+      owner: postOwner,
+    });
   }, [postData])
 
   return (
@@ -58,15 +67,23 @@ export default function Post({ user, setUser, postData, singlePost }) {
               null
             }
           </div>
-          <div className="actions">
-            <button>xx Like</button>
+          <div className="flex">
+            <PostLike 
+              setUser={setUser}
+              validateActions={validateActions}
+              setValidateActions={setValidateActions}
+              postId={postData._id}
+            />
             <Bookmark
               setUser={setUser}
               validateActions={validateActions}
               setValidateActions={setValidateActions}
               postId={postData._id}
             />
-            <button>...</button>
+            <MoreActions
+              validateActions={validateActions}
+              postId={postData._id}
+            />
           </div>
         </div>
 
