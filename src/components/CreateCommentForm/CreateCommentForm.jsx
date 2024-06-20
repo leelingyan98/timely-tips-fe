@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import './CreateCommentForm.css'
-import * as commentsAPI from '../../utilities/comments-api.js'
+import { useState } from 'react';
+import * as commentsAPI from '../../utilities/comments-api.js';
 
 export default function CreateCommentForm({ postObj }) {
   const [commentDetails, setCommentDetails] = useState({content: "", postId: postObj});
-  const [validateCommentForm, setValidateCommentForm] = useState({});
   const [error, setError] = useState("");
 
   function handleChange(evt) {

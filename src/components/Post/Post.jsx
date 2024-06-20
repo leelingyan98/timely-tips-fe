@@ -77,7 +77,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
     <>
       <div className="post-container">
         <div className="top-row">
-          <div className="post-creator">
+          <div className="post-creator flex">
             {postUser ?
               <>
                 <div className="display-picture">
@@ -121,7 +121,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
           </div>
         </div>
 
-        <p className="content">
+        <p className="content my-5">
           {postData.content}
         </p>
         <div className="photo">Post image here</div>
@@ -145,7 +145,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
           </>
           :
           <>
-            <div className="bottom-row">
+            <div className="bottom-row mt-5">
               <Link to={`/post/${postData._id}`}><button>View Post</button></Link>
               <div className="comments-count">
               {comments ? comments.length : 0} comments

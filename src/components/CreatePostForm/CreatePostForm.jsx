@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import './CreatePostForm.css';
 import * as postsAPI from '../../utilities/posts-api';
 
 export default function CreatePostForm({ user }) {
   const [postDetails, setPostDetails] = useState({ userid: user._id, content: '', files: null });
   const [file, setFile] = useState([]);
-  const [validatePostForm, setValidatePostForm] = useState({});
   const [error, setError] = useState("");
 
   function handleChange(evt) {
@@ -46,7 +44,7 @@ export default function CreatePostForm({ user }) {
   }
 
 return (
-  <div className="form-container">
+  <div className="form-container justify-self-center">
     <h2>Share your tip..</h2>
     <form autoComplete="off" onSubmit={handleSubmit}>
       <textarea
