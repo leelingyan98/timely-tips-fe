@@ -28,12 +28,24 @@ export function findByUsername(username) {
   return sendRequest(`${BASE_URL}/find/username/${username}`);
 }
 
+export function findByEmail(userDetails) {
+  return sendRequest(`${BASE_URL}/find/email`, "POST", userDetails);
+}
+
 export function search(searchTerm) {
   return sendRequest(`${BASE_URL}/search/${searchTerm}`)
 }
 
-export function updateUser(userDetails) {
-  return sendRequest(`${BASE_URL}/update/details`, "PATCH", userDetails);
+export function updateUserDetails(userId, userDetails) {
+  return sendRequest(`${BASE_URL}/update/${userId}`, "PATCH", userDetails);
+}
+
+export function updateUserPicture(userId, userPicture) {
+  return sendRequest(`${BASE_URL}/update/picture/${userId}`, "PATCH", userPicture);
+}
+
+export function updateUserRemovePicture(userId, userPicture) {
+  return sendRequest(`${BASE_URL}/update/picture/remove/${userId}`, "PATCH", userPicture);
 }
 
 export function removeUser(userId) {

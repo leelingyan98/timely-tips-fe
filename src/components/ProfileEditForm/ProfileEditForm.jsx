@@ -8,7 +8,7 @@ export default function ProfileEditForm({ userData }) {
   const [editForm, setEditForm] = useState({
     username: userData.username,
     email: userData.email,
-    displayName: userData.displayName,
+    displayName: userData.displayName || " ",
   });
   const [error, setError] = useState('');
   //   const disable = (userData.password !== userData.confirm);
@@ -31,10 +31,13 @@ export default function ProfileEditForm({ userData }) {
 
   async function handleSubmit(evt) {
     try {
-      await usersAPI.updateUser(editForm);
+      evt.preventDefault();
+
+      await usersAPI.updateUserDetails(userData._id, editForm);
+      window.location.reload();
+      setError("");
     } catch (error) {
-      setError("Failed to update profile");
-      console.error('Error updating profile:', error.message);
+      setError("Failed to update profile: Username or email is taken.");
     }
   };
 
@@ -58,7 +61,6 @@ export default function ProfileEditForm({ userData }) {
         <TextInput className="mb-2"
           id="displayName" type="displayName" name="displayName" icon={UserCircleIcon}
           value={editForm.displayName} onChange={handleChange}
-          required
         />
         <Button type="submit" className="text-primary">Update profile</Button>
       </form>

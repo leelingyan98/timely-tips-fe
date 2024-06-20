@@ -11,11 +11,7 @@ export default function ProfileEdit({ user }) {
   useEffect(() => {
     const getAllUserData = async () => {
       const userData = await usersAPI.findByUserId(user._id);
-      setUserData({
-        username: userData.username,
-        email: userData.email,
-        displayName: userData.displayName
-      });
+      setUserData(userData);
     }
     getAllUserData();
   }, [])

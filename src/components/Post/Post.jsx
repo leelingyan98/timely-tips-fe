@@ -80,11 +80,11 @@ export default function Post({ user, setUser, postData, singlePost }) {
                     <span className="handle font-bold text-lg">@{postUser.username}</span>
                   </Link>
                   {postUser.displayName ?
-                    <span className="display-name">{postUser.displayName}</span>
+                    <span className="display-name text-base text-gray-600"> {postUser.displayName}</span>
                     :
                     null
                   }
-                  <div className="text-sm">{formatTimeAgo(postData.createdAt)}</div>
+                  <div className="text-sm text-gray-500">{formatTimeAgo(postData.createdAt)}</div>
                 </div>
               </>
               :

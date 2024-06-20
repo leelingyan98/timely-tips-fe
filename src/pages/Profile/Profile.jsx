@@ -19,10 +19,20 @@ export default function Profile({ user, setUser }) {
 
   useEffect(() => {
     const getProfileData = async () => {
-      const thisProfileUser = await usersAPI.findByUsername(handle);
-      setProfileUser(thisProfileUser);
-      checkFollowing(thisProfileUser._id);
-      getFollows(thisProfileUser._id);
+      let profileUserId = "";
+
+      if (user.username === handle) {
+        const thisProfileUser = await usersAPI.findByUserId(user._id);
+        setProfileUser(thisProfileUser);
+        profileUserId = thisProfileUser._id;
+      } else {
+        const thisProfileUser = await usersAPI.findByUsername(handle);
+        setProfileUser(thisProfileUser);
+        profileUserId = thisProfileUser._id;
+      }
+      
+      checkFollowing(profileUserId);
+      getFollows(profileUserId);
 
       const posts = await postsAPI.findByUsername(handle);
       setPosts(posts);
