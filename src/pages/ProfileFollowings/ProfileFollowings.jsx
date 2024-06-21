@@ -24,13 +24,13 @@ export default function ProfileFollowings() {
         <Link to={`/profile/${handle}/followers`}>Followers</Link>
       </p>
       {followings.length > 0 ?
-        <>
+        <div className="user-search grid grid-cols-2">
           {followings.map((following) => (
             <div key={following._id}>
               <FollowUserCard userId={following.targetUser} />
             </div>
           ))}
-        </>
+        </div>
         :
         "Not following anyone yet..."
       }

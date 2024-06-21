@@ -65,6 +65,7 @@ export default function ProfileEdit({ user }) {
                     name="profilepicture"
                     accept="image/*"
                     onChange={handleChange}
+                    required
                   />
                   <div className="flex justify-center mt-5">
                     { user.profilePicture.public_id !== "" ?
@@ -75,9 +76,8 @@ export default function ProfileEdit({ user }) {
                     <Button type="submit" className="mx-2 text-primary">Update</Button>
                   </div>
                 </form>
+                <p className="error-message">{error}</p>
               </div>
-              
-              <p className="error-message">{error}</p>
               <ProfileEditForm userData={userData} />
             </div>
           </>

@@ -24,13 +24,13 @@ export default function ProfileFollowers() {
         <strong>Followers</strong>
       </p>
       {followers.length > 0 ?
-        <>
+        <div className="user-search grid grid-cols-2">
           {followers.map((follower) => (
             <div key={follower._id}>
               <FollowUserCard userId={follower.followingUser} />
             </div>
           ))}
-        </>
+        </div>
         :
         "No followers yet..."
       }
