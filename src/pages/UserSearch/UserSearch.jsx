@@ -8,19 +8,18 @@ export default function UserSearch() {
   const [searchInput, setSearchInput] = useState('');
   const [searchData, setSearchData] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
+  
 
   useEffect(() => {
     const searchUsers = async () => {
-      const data = await usersAPI.search(searchData);
-      console.log('data', data)
-      setSearchResults(data);
+      const users = await usersAPI.search(searchData);
+      setSearchResults(users);
     }
     searchUsers();
   }, [searchData])
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    console.log('Search Input', searchInput);
     setSearchData(searchInput);
   };
 
@@ -33,13 +32,15 @@ export default function UserSearch() {
         handleSubmit={handleSubmit}
       />
       { searchResults.length > 0 ? 
-        <ul className="user-search">
+        <div className="user-search grid grid-cols-2">
           {searchResults.map((user) => (
-          <li key={user._id}><UserSearchCard userResult={user} /></li>
+          <div className="self-center" key={user._id}>
+            <UserSearchCard userResult={user} />
+          </div>
         ))}
-        </ul>
+        </div>
       :
-      "no users"
+      "No users found. Start by searching other terms."
       }
     </div>
   )

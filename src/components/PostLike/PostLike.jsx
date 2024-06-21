@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as postLikesAPI from '../../utilities/post-likes-api.js';
-import { HeartIcon as LikedIcon } from "@heroicons/react/24/solid"
-import { HeartIcon as LikeIcon } from "@heroicons/react/24/outline"
+import { HeartIcon as LikedIcon } from "@heroicons/react/24/solid";
+import { HeartIcon as LikeIcon } from "@heroicons/react/24/outline";
 
 export default function PostLike(props) {
   const {

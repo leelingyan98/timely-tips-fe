@@ -27,10 +27,10 @@ export default function MoreActions(props) {
         <>
             {validateActions.owner ?
                 <>
-                    <span className="pl-1" onClick={() => setEditMode(!editMode)}>
+                    <span className="pl-1 cursor-pointer" onClick={() => setEditMode(!editMode)}>
                         <PencilSquareIcon className="h-6 w-6 text-black hover:text-gray-500" />
                     </span>
-                    <span className="pl-2" onClick={() => handleDelete(type)}>
+                    <span className="pl-2 cursor-pointer" onClick={() => handleDelete(type)}>
                         <TrashIcon className="h-6 w-6 text-secondarydark hover:text-secondary" />
                     </span>
                 </>
