@@ -7,8 +7,6 @@ export default function CreatePostForm({ user }) {
   const [error, setError] = useState("");
 
   function handleChange(evt) {
-    console.log('event', evt.target);
-
     if (evt.target.name === "photo") {
       setPostDetails({
         ...postDetails,
@@ -20,7 +18,6 @@ export default function CreatePostForm({ user }) {
         [evt.target.name]: evt.target.value,
       });
     }
-    console.log("post details", postDetails);
   }
 
   async function handleSubmit(evt) {
@@ -50,7 +47,7 @@ return (
       <Textarea
         id="content" name="content"
         placeholder="Start writing your tip here! i.e. Here are 5 ways you can save money:"
-        rows={4} cols={50} maxLength={300}
+        rows={4} cols={100} maxLength={300}
         value={postDetails.content} onChange={handleChange}
         required
       />

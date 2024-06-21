@@ -10,11 +10,13 @@ import { formatTimeAgo } from "../../utilities/common.js";
 import Bookmark from '../Bookmark/Bookmark.jsx';
 import PostLike from '../PostLike/PostLike.jsx';
 import MoreActions from '../MoreActions/MoreActions.jsx';
+import UpdateContentForm from '../UpdateContentForm/UpdateContentForm.jsx';
 
 export default function Post({ user, setUser, postData, singlePost }) {
   const [postUser, setPostUser] = useState();
   const [comments, setComments] = useState();
   const [postLikes, setPostLikes] = useState();
+  const [editMode, setEditMode] = useState(false);
   const [validateActions, setValidateActions] = useState({
     bookmarked: false,
     liked: false,
@@ -28,7 +30,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
 
       const commentsData = await commentsAPI.findByPostId(postData._id);
       setComments(commentsData);
-      
+
       await fetchPostLikes(postData._id);
     }
     getPostData();
@@ -63,7 +65,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
     const newLikes = await postLikesAPI.findByPostId(currentPostId);
     setPostLikes(newLikes);
   };
-  
+
 
   return (
     <>
@@ -92,7 +94,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
             }
           </div>
           <div className="flex items-start">
-            <PostLike 
+            <PostLike
               validateActions={validateActions}
               setValidateActions={setValidateActions}
               postId={postData._id}
@@ -106,15 +108,25 @@ export default function Post({ user, setUser, postData, singlePost }) {
             />
             <MoreActions
               validateActions={validateActions}
-              postId={postData._id}
+              type="post" objId={postData._id}
+              editMode={editMode}
+              setEditMode={setEditMode}
             />
           </div>
         </div>
 
-        <p className="content my-5">
-          {postData.content}
-        </p>
-        { postData.photo ? 
+        {editMode ?
+          <UpdateContentForm
+            contentData={postData} type="post"
+            editMode={editMode} setEditMode={setEditMode}
+          />
+          :
+          <p className="content my-5">
+            {postData.content}
+          </p>
+        }
+
+        {postData.photo ?
           <>
             <div className="photo">
               <img src={postData.photo.url} />
@@ -133,7 +145,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
               <>
                 {comments.map((comment) => (
                   <div key={comment._id}>
-                    <CommentCard commentData={comment} />
+                    <CommentCard user={user} commentData={comment} />
                   </div>
                 ))}
               </>
@@ -145,7 +157,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
             <div className="bottom-row mt-5">
               <Link to={`/post/${postData._id}`}><button>View Post</button></Link>
               <div className="comments-count">
-              {comments ? comments.length : 0} {"comment(s)"}
+                {comments ? comments.length : 0} {"comment(s)"}
               </div>
             </div>
           </>

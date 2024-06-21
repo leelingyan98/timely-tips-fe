@@ -30,7 +30,7 @@ export default function CreateCommentForm({ postObj }) {
         <Textarea
           id="content" name="content"
           placeholder="Leave a comment..."
-          rows={4} cols={50} maxLength={300}
+          rows={4} cols={100} maxLength={300}
           value={commentDetails.content} onChange={handleChange}
           required
         />
