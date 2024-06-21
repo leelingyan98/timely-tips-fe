@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import * as postsAPI from '../../utilities/posts-api';
 import { Textarea } from "flowbite-react";
-import { useNavigate } from 'react-router';
 
 export default function CreatePostForm({ user }) {
   const [postDetails, setPostDetails] = useState({ userid: user._id, content: '', files: null });
   const [error, setError] = useState("");
-
-  const navigate = useNavigate();
 
   function handleChange(evt) {
     if (evt.target.name === "photo") {
@@ -37,7 +34,6 @@ export default function CreatePostForm({ user }) {
       await postsAPI.createPost(formData);
       setPostDetails({ userid: user._id, content: "", files: null });
       document.getElementById('photo').value = '';
-      navigate(0);
     } catch (error) {
       setError("Failed to create post");
       console.error('Error creating post:', error.message);

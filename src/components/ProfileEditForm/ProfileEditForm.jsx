@@ -3,7 +3,6 @@ import * as usersAPI from '../../utilities/users-api.js';
 import { Label, TextInput, Button } from "flowbite-react";
 import { HiMail } from "react-icons/hi";
 import { UserCircleIcon } from "@heroicons/react/24/solid"
-import { useNavigate } from 'react-router';
 
 export default function ProfileEditForm({ userData }) {
   const [editForm, setEditForm] = useState({
@@ -12,8 +11,6 @@ export default function ProfileEditForm({ userData }) {
     displayName: userData.displayName || " ",
   });
   const [error, setError] = useState('');
-  
-  const navigate = useNavigate();
 
   const handleChange = (evt) => {
     setEditForm({
@@ -27,8 +24,7 @@ export default function ProfileEditForm({ userData }) {
       evt.preventDefault();
 
       await usersAPI.updateUserDetails(userData._id, editForm);
-      navigate(0);
-      setError("");
+      setError("Profile updated!");
     } catch (error) {
       setError("Failed to update profile: Username or email is taken.");
     }

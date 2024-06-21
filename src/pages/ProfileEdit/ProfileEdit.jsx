@@ -3,14 +3,11 @@ import * as usersAPI from '../../utilities/users-api.js';
 import BackButton from '../../components/BackButton/BackButton.jsx';
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm.jsx';
 import { Button, FileInput } from "flowbite-react";
-import { useNavigate } from 'react-router';
 
 export default function ProfileEdit({ user }) {
   const [userData, setUserData] = useState();
   const [editPicture, setEditPicture] = useState();
   const [error, setError] = useState('');
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getAllUserData = async () => {
@@ -22,8 +19,6 @@ export default function ProfileEdit({ user }) {
 
   function handleChange(evt) {
     setEditPicture({files: evt.target.files[0]});
-
-    console.log(editPicture);
   }
 
   async function handleProfilePicSubmit(evt) {
@@ -35,17 +30,17 @@ export default function ProfileEdit({ user }) {
     try {
       await usersAPI.updateUserPicture(user._id, formData);
       document.getElementById('profilepicture').value = '';
-      navigate(0);
+      setError("Profile picture updated! It will take around 1 minute to reflect.");
     } catch (error) {
       setError("Failed to update profile picture");
       console.error('Error update profile picture:', error.message);
     }
   }
 
-  async function handleRemoveProfilePicture(evt) {
+  async function handleRemoveProfilePicture() {
     try {
         await usersAPI.updateUserRemovePicture(user._id);
-        navigate(0);
+        setError("Profile picture removed!");
     } catch (error) {
         setError("Failed to delete photo");
         console.error('Error deleting photo:', error.message);

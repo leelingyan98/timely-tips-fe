@@ -1,7 +1,6 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { removePost } from '../../utilities/posts-api';
 import { removeComment } from '../../utilities/comments-api';
-import { useNavigate } from "react-router";
 
 export default function MoreActions(props) {
     const {
@@ -10,8 +9,6 @@ export default function MoreActions(props) {
         editMode, setEditMode,
     } = props;
 
-    const navigate = useNavigate();
-
     async function handleDelete(evt) {
         try {
             if (type === "post") {
@@ -19,7 +16,6 @@ export default function MoreActions(props) {
             } else if (type === "comment") {
                 await removeComment(contentData._id);
             }
-            navigate(0);
         } catch (error) {
             console.error('Error updating:', error.message);
         }
