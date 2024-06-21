@@ -25,6 +25,10 @@ export function findAllPosts() {
   return sendRequest(`${BASE_URL}/find`);
 }
 
+export function findByFollowings() {
+  return sendRequest(`${BASE_URL}/find/following`);
+}
+
 export function findByPostId(postId) {
   return sendRequest(`${BASE_URL}/find/id/${postId}`);
 }
@@ -40,6 +44,7 @@ export function findByUserId(userId) {
 export function findByUsername(username) {
   return sendRequest(`${BASE_URL}/find/username/${username}`);
 }
+
 
 ////////////////////////////
 //        Bookmarks
