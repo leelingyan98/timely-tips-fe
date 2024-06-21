@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import * as commentsAPI from '../../utilities/comments-api.js';
 import { Textarea } from "flowbite-react";
+import { useNavigate } from 'react-router';
 
 export default function CreateCommentForm({ postObj }) {
   const [commentDetails, setCommentDetails] = useState({content: "", postId: postObj});
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   function handleChange(evt) {
     setCommentDetails({
@@ -18,7 +21,7 @@ export default function CreateCommentForm({ postObj }) {
     try {
       commentsAPI.createComment(commentDetails);
       setCommentDetails({content: "", postId: postObj});
-      window.location.reload();
+      navigate(0);
     } catch (error) {
       setError("Failed to create comment");
     }

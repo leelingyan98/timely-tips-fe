@@ -67,15 +67,6 @@ export default function Post({ user, setUser, postData, singlePost }) {
     setPostLikes(newLikes);
   };
 
-  // function refreshComment(uid) {
-  //   const tempArr = comments;
-  //   const index = comments.findIndex(comment => comment._id === uid);
-  //   if (index !== -1) {
-  //       const newComments = tempArr.splice(index, 1)[0];
-  //       setComments(newComments);
-  //   }
-  // }
-
   return (
     <>
       <div className="post-container">
@@ -127,7 +118,7 @@ export default function Post({ user, setUser, postData, singlePost }) {
           <UpdateContentForm
             contentData={postData} type="post"
             setEditMode={setEditMode}
-            currentPost={currentPost} setContent={setCurrentPost}
+            currentContent={currentPost} setContent={setCurrentPost}
           />
           :
           <p className="content my-5">

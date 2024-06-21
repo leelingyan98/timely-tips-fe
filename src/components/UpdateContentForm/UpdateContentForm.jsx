@@ -3,7 +3,7 @@ import * as postsAPI from '../../utilities/posts-api';
 import { updateComment } from '../../utilities/comments-api';
 import { Button, Textarea } from "flowbite-react";
 
-export default function UpdateContentForm({ contentData, type, setEditMode, currentPost, setContent }) {
+export default function UpdateContentForm({ contentData, type, setEditMode, currentContent, setContent }) {
     const [formDetails, setFormDetails] = useState({ content: contentData.content });
     const [error, setError] = useState("");
 
@@ -22,7 +22,7 @@ export default function UpdateContentForm({ contentData, type, setEditMode, curr
             } else if (type === "comment") {
                 await updateComment(contentData._id, formDetails);
             }
-            setContent({ ...contentData, content: formDetails.content })
+            setContent({ ...currentContent, content: formDetails.content })
             setEditMode(false);
         } catch (error) {
             setError("Failed to update");
@@ -69,7 +69,7 @@ export default function UpdateContentForm({ contentData, type, setEditMode, curr
             </form>
             {type === "post" ?
                 <>
-                    {currentPost.photo ?
+                    {currentContent.photo ?
                         <Button className="text-primary" onClick={handleRemovePhoto}>Delete photo</Button>
                         : null
                     }
