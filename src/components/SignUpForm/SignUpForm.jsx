@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { signUp } from '../../utilities/users-service.js';
 import { useNavigate } from "react-router-dom";
-import { Label, TextInput, Button } from "flowbite-react";
+import { Card, Label, TextInput, Button } from "flowbite-react";
 import { HiMail } from "react-icons/hi";
 import { KeyIcon } from "@heroicons/react/24/solid"
 
@@ -49,7 +49,7 @@ export default function SignUpForm({ setUser, showLogin, setShowLogin }) {
           Log in here
         </span>
       </p>
-      <div className="form-container">
+      <Card className="form-container mt-5">
         <form autoComplete="off" onSubmit={handleSubmit}>
         <Label htmlFor="username" value="Username (handle) *" />
         <TextInput
@@ -79,25 +79,9 @@ export default function SignUpForm({ setUser, showLogin, setShowLogin }) {
           required
         />
         <Button type="submit" disabled={disable} className="text-primary">Sign up</Button>
-
-          {/* <label htmlFor="username">Username {"(handle)"}</label><br />
-          <input type="text" name="username" value={userData.username} onChange={handleChange} required /><br />
-          <label htmlFor="email">Email</label><br />
-          <input
-            type="email"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-            required
-          /><br />
-          <label>Password</label><br />
-          <input type="password" name="password" value={userData.password} onChange={handleChange} required /><br />
-          <label>Confirm</label><br />
-          <input type="password" name="confirm" value={userData.confirm} onChange={handleChange} required /><br />
-          <button type="submit" disabled={disable}>SIGN UP</button>*/}
         </form>
-      </div>
-      <p className="error-message">&nbsp;{error}</p>
+        <p className="error-message">{error}</p>
+      </Card>
     </div>
   );
 }

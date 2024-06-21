@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/users-service.js';
-import { Label, TextInput, Button } from "flowbite-react";
+import { Card, Label, TextInput, Button } from "flowbite-react";
 import { HiMail } from "react-icons/hi";
-import { KeyIcon } from "@heroicons/react/24/solid"
+import { KeyIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ setUser, showLogin, setShowLogin }) {
   const [credentials, setCredentials] = useState({
@@ -38,7 +39,7 @@ export default function LoginForm({ setUser, showLogin, setShowLogin }) {
           Sign up instead
         </span>
       </p>
-      <div className="form-container">
+      <Card className="form-container mt-5">
         <form autoComplete="off" onSubmit={handleSubmit}>
           <Label htmlFor="email" value="Email address" />
           <TextInput
@@ -54,8 +55,8 @@ export default function LoginForm({ setUser, showLogin, setShowLogin }) {
           />
           <Button type="submit" className="text-primary">Log in</Button>
         </form>
-      </div>
-      <p className="error-message">&nbsp;{error}</p>
+        <p className="error-message">{error}</p>
+      </Card>
     </div>
   );
 }

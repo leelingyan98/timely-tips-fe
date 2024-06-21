@@ -24,4 +24,5 @@
 
 .link {
   color: var(--color-primary);
+  cursor: pointer;
 }

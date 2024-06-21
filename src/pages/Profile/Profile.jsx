@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { getUser } from '../../utilities/users-service.js';
 import Post from '../../components/Post/Post.jsx';
 import './Profile.css';
 import * as usersAPI from '../../utilities/users-api.js';
@@ -102,7 +101,7 @@ export default function Profile({ user, setUser }) {
       </div>
       {profileUser ?
         <div className="profile-container">
-          <div className="about">
+          <div className="about rounded-lg shadow">
             <div className="profile-picture">
               <img src={`${profileUser.profilePicture.url}`} />
             </div>
