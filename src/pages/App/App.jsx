@@ -37,7 +37,7 @@ function App() {
           <LoginPage setUser={setUser} />
         }
         <Routes>
-          <Route path="*" element={<Navigate to="/home" replace={true} />} />
+          <Route path="/*" element={<Navigate to="/home" replace={true} />} />
         </Routes>
       </div>
     </>
