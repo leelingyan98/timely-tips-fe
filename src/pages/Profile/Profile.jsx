@@ -14,6 +14,7 @@ export default function Profile({ user, setUser }) {
   const { handle } = useParams();
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
+  const [followerCount, setFollowerCount] = useState(0)
   const [validateFollow, setValidateFollow] = useState({ isUser: false, isFollow: false });
   const [error, setError] = useState("");
 
@@ -54,11 +55,13 @@ export default function Profile({ user, setUser }) {
 
     const followers = await followingsAPI.findByTargetUser(profileUserId);
     setFollowers(followers);
+    if (followers) {
+      setFollowerCount(followers.length);
+    }
   };
 
   const checkFollowing = async (profileUserId) => {
     const checkIsUser = await user._id === profileUserId;
-    console.log('check is user', checkIsUser)
     if (!checkIsUser) {
       const following = await followingsAPI.findByUsers(profileUserId);
       console.log('check data', following)
@@ -75,6 +78,7 @@ export default function Profile({ user, setUser }) {
     try {
       followingsAPI.createFollowing({targetUser: profileUser._id});
       getFollows(profileUser._id);
+      setFollowerCount(followerCount + 1);
       setValidateFollow({...validateFollow, isFollow: true })
     } catch (error) {
       setError("Could not follow user");
@@ -84,7 +88,7 @@ export default function Profile({ user, setUser }) {
   function handleUnfollow() {
     try {
       followingsAPI.removeFollowing({targetUser: profileUser._id});
-      getFollows(profileUser._id);
+      setFollowerCount(followerCount - 1);
       setValidateFollow({...validateFollow, isFollow: false })
     } catch (error) {
       setError("Could not unfollow user");
@@ -113,7 +117,7 @@ export default function Profile({ user, setUser }) {
               <p>
                 <Link to={`/profile/${profileUser.username}/following`}>{followings.length} Following</Link>
                 &nbsp;|&nbsp;
-                <Link to={`/profile/${profileUser.username}/followers`}>{followers.length} Followers</Link>
+                <Link to={`/profile/${profileUser.username}/followers`}>{followerCount} Followers</Link>
               </p>
               <p>{posts.length} {"tip(s)"} shared</p>
               { validateFollow.isUser ?

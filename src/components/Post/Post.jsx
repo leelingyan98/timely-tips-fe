@@ -97,8 +97,6 @@ export default function Post({ user, setUser, postData, singlePost }) {
               setValidateActions={setValidateActions}
               postId={postData._id}
               postLikes={postLikes}
-              setPostLikes={setPostLikes}
-              fetchPostLikes={fetchPostLikes}
             />
             <Bookmark
               setUser={setUser}
