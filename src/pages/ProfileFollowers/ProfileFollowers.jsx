@@ -17,8 +17,8 @@ export default function ProfileFollowers() {
 
   return (
     <>
-      <Link to={`/profile/${handle}`}>Back to profile</Link>
-      <p>
+      <Link to={`/profile/${handle}`}>Back to @{handle}'s profile</Link>
+      <p className="my-5">
       <Link to={`/profile/${handle}/following`}>Following</Link>
         &nbsp;|&nbsp;
         <strong>Followers</strong>

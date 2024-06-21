@@ -4,7 +4,7 @@ import * as usersAPI from '../../utilities/users-api.js';
 import UserSearchCard from '../UserSearchCard/UserSearchCard.jsx';
 
 export default function FollowUserCard({ userId }) {
-  const [cardUser, setCardUser] = useState({});
+  const [cardUser, setCardUser] = useState();
 
   useEffect(() => {
     const getCardUser = async () => {
@@ -16,9 +16,13 @@ export default function FollowUserCard({ userId }) {
 
   return (
     <>
-      <Link to={`/profile/${cardUser.username}`}>
-        <UserSearchCard userResult={cardUser} />
-      </Link>
+      {cardUser ?
+        <Link to={`/profile/${cardUser.username}`}>
+          <UserSearchCard userResult={cardUser} />
+        </Link>
+        : null
+      }
+      
     </>
   )
 }
