@@ -31,7 +31,7 @@ function App() {
               <Route path="/profile/:handle/following" element={<ProfileFollowings />} />
               <Route path="/profile/:handle/followers" element={<ProfileFollowers />} />
               <Route path="/post/:id" element={<SinglePost user={user} setUser={setUser} />} />
-              <Route path="*" element={<Navigate to="/home" replace />} />
+              <Route path="*" element={<Navigate to="/home" replace={true} />} />
             </Routes>
           </>
           :
