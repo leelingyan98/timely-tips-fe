@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import * as postsAPI from '../../utilities/posts-api';
-import * as commentsAPI from '../../utilities/comments-api';
+import { updateComment } from '../../utilities/comments-api';
 import { Button, Textarea } from "flowbite-react";
 
-export default function UpdateContentForm({ contentData, type, setEditMode, setContent }) {
+export default function UpdateContentForm({ contentData, type, setEditMode, currentPost, setContent }) {
     const [formDetails, setFormDetails] = useState({ content: contentData.content });
     const [error, setError] = useState("");
 
@@ -20,13 +20,24 @@ export default function UpdateContentForm({ contentData, type, setEditMode, setC
             if (type === "post") {
                 await postsAPI.updatePostContent(contentData._id, formDetails);
             } else if (type === "comment") {
-                await commentsAPI.updateComment(contentData._id, formDetails);
+                await updateComment(contentData._id, formDetails);
             }
-            setContent({...contentData, content: formDetails.content})
+            setContent({ ...contentData, content: formDetails.content })
             setEditMode(false);
         } catch (error) {
             setError("Failed to update");
             console.error('Error updating:', error.message);
+        }
+    }
+
+    async function handleRemovePhoto(evt) {
+        evt.preventDefault();
+        try {
+            const post = await postsAPI.removePostPhoto(contentData._id);
+            setContent({ ...contentData, photo: { public_id: null, url: null } })
+        } catch (error) {
+            setError("Failed to delete photo");
+            console.error('Error deleting photo:', error.message);
         }
     }
 
@@ -52,9 +63,20 @@ export default function UpdateContentForm({ contentData, type, setEditMode, setC
                         className="text-primary border-primary hover:border-primarydark"
                         type="submit"
                     >
-                        Update</Button>
+                        Update
+                    </Button>
                 </div>
             </form>
+            {type === "post" ?
+                <>
+                    {currentPost.photo ?
+                        <Button className="text-primary" onClick={handleRemovePhoto}>Delete photo</Button>
+                        : null
+                    }
+                </>
+                : null
+            }
+
             {error && <p className="error-message">{error}</p>}
         </div>
     )

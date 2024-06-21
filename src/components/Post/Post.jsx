@@ -67,6 +67,14 @@ export default function Post({ user, setUser, postData, singlePost }) {
     setPostLikes(newLikes);
   };
 
+  // function refreshComment(uid) {
+  //   const tempArr = comments;
+  //   const index = comments.findIndex(comment => comment._id === uid);
+  //   if (index !== -1) {
+  //       const newComments = tempArr.splice(index, 1)[0];
+  //       setComments(newComments);
+  //   }
+  // }
 
   return (
     <>
@@ -108,9 +116,9 @@ export default function Post({ user, setUser, postData, singlePost }) {
               postId={postData._id}
             />
             <MoreActions
-              validateActions={validateActions}
-              editMode={editMode}
-              setEditMode={setEditMode}
+              contentData={postData} setContent={setCurrentPost}
+              type="post" validateActions={validateActions}
+              editMode={editMode} setEditMode={setEditMode}
             />
           </div>
         </div>
@@ -118,7 +126,8 @@ export default function Post({ user, setUser, postData, singlePost }) {
         {editMode ?
           <UpdateContentForm
             contentData={postData} type="post"
-            setEditMode={setEditMode} setContent={setCurrentPost}
+            setEditMode={setEditMode}
+            currentPost={currentPost} setContent={setCurrentPost}
           />
           :
           <p className="content my-5">
@@ -126,10 +135,10 @@ export default function Post({ user, setUser, postData, singlePost }) {
           </p>
         }
 
-        {postData.photo ?
+        {currentPost.photo ?
           <>
             <div className="photo">
-              <img src={postData.photo.url} />
+              <img src={currentPost.photo.url} />
             </div>
           </>
           : null

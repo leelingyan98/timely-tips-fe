@@ -11,7 +11,6 @@ export default function CreateCommentForm({ postObj }) {
       ...commentDetails,
       [evt.target.name]: evt.target.value,
     });
-    console.log("comment details", commentDetails);
   }
 
   function handleSubmit(evt) {
@@ -19,6 +18,7 @@ export default function CreateCommentForm({ postObj }) {
     try {
       commentsAPI.createComment(commentDetails);
       setCommentDetails({content: "", postId: postObj});
+      window.location.reload();
     } catch (error) {
       setError("Failed to create comment");
     }

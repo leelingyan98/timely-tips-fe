@@ -6,7 +6,7 @@ import "./CommentCard.css";
 import MoreActions from "../MoreActions/MoreActions.jsx";
 import UpdateContentForm from "../UpdateContentForm/UpdateContentForm.jsx";
 
-export default function CommentCard({ user, commentData }) {
+export default function CommentCard({ user, commentData, refresh }) {
     const [commentUser, setCommentUser] = useState();
     const [currentComment, setCurrentComment] = useState(commentData);
     const [editMode, setEditMode] = useState(false);
@@ -18,7 +18,6 @@ export default function CommentCard({ user, commentData }) {
     useEffect(() => {
         const getUserData = async () => {
             const userData = await usersAPI.findByUserId(commentData.user);
-            console.log(userData)
             setCommentUser(userData);
         };
         getUserData();
@@ -63,9 +62,10 @@ export default function CommentCard({ user, commentData }) {
                         
                         <div className="flex justify-self-end self-start">
                             <MoreActions
-                                validateActions={validateActions}
-                                editMode={editMode}
-                                setEditMode={setEditMode}
+                                contentData={commentData} setContent={setCurrentComment}
+                                type="comment" validateActions={validateActions}
+                                editMode={editMode} setEditMode={setEditMode}
+                                refresh={refresh}
                             />
                         </div>
                     </div>
