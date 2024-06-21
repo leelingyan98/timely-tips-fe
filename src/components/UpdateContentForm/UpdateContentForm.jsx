@@ -3,7 +3,7 @@ import * as postsAPI from '../../utilities/posts-api';
 import * as commentsAPI from '../../utilities/comments-api';
 import { Button, Textarea } from "flowbite-react";
 
-export default function UpdateContentForm({ contentData, type, setEditMode }) {
+export default function UpdateContentForm({ contentData, type, setEditMode, setContent }) {
     const [formDetails, setFormDetails] = useState({ content: contentData.content });
     const [error, setError] = useState("");
 
@@ -12,15 +12,18 @@ export default function UpdateContentForm({ contentData, type, setEditMode }) {
             ...formDetails,
             [evt.target.name]: evt.target.value,
         });
-        console.log("form details", formDetails);
     }
 
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
             if (type === "post") {
-                await postsAPI.createPost(formData);
+                await postsAPI.updatePostContent(contentData._id, formDetails);
+            } else if (type === "comment") {
+                await commentsAPI.updateComment(contentData._id, formDetails);
             }
+            setContent({...contentData, content: formDetails.content})
+            setEditMode(false);
         } catch (error) {
             setError("Failed to update");
             console.error('Error updating:', error.message);
@@ -41,7 +44,7 @@ export default function UpdateContentForm({ contentData, type, setEditMode }) {
                     <p>{formDetails.content.length}/300 characters</p>
                     <Button
                         className="mx-3 bg-secondarylight text-secondary border-secondary hover:border-secondarydark"
-                        onClick={(e) => setEditMode(false)}
+                        onClick={() => setEditMode(false)}
                     >
                         Cancel
                     </Button>

@@ -8,6 +8,7 @@ import UpdateContentForm from "../UpdateContentForm/UpdateContentForm.jsx";
 
 export default function CommentCard({ user, commentData }) {
     const [commentUser, setCommentUser] = useState();
+    const [currentComment, setCurrentComment] = useState(commentData);
     const [editMode, setEditMode] = useState(false);
     const [validateActions, setValidateActions] = useState({
         liked: false,
@@ -50,11 +51,11 @@ export default function CommentCard({ user, commentData }) {
                                 {editMode ?
                                     <UpdateContentForm
                                         contentData={commentData} type="comment"
-                                        editMode={editMode} setEditMode={setEditMode}
+                                        setEditMode={setEditMode} setContent={setCurrentComment}
                                     />
                                     :
                                     <p className="content">
-                                        {commentData.content}
+                                        {currentComment.content}
                                     </p>
                                 }
                             </div>
@@ -63,7 +64,6 @@ export default function CommentCard({ user, commentData }) {
                         <div className="flex justify-self-end self-start">
                             <MoreActions
                                 validateActions={validateActions}
-                                type="comment" objId={commentData._id}
                                 editMode={editMode}
                                 setEditMode={setEditMode}
                             />

@@ -4,16 +4,20 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 const BASE_URL = `${apiUrl}/api/comments`;
 
+////////////////////////////
+//        Create
+////////////////////////////
+
 export function createComment(commentDetails) {
   return sendRequest(`${BASE_URL}/create`, "POST", commentDetails);
 }
 
+////////////////////////////
+//         Find
+////////////////////////////
+
 export function findAllComments() {
   return sendRequest(`${BASE_URL}/find`);
-}
-
-export function findByCommentId(commentId) {
-  return sendRequest(`${BASE_URL}/find/id/${commentId}`);
 }
 
 export function findByPostId(postId) {
@@ -24,9 +28,17 @@ export function findByUserId(userId) {
   return sendRequest(`${BASE_URL}/find/user/${userId}`);
 }
 
-export function findByUsername(username) {
-  return sendRequest(`${BASE_URL}/find/username/${username}`);
+////////////////////////////
+//        Update
+////////////////////////////
+
+export function updateComment(commentId, commentDetails) {
+  return sendRequest(`${BASE_URL}/update/${commentId}`, "PATCH", commentDetails);
 }
+
+////////////////////////////
+//        Delete
+////////////////////////////
 
 export function removeComment(commentId) {
   return sendRequest(`${BASE_URL}/delete/id/${commentId}`, "DELETE");

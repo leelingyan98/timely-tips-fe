@@ -15,6 +15,7 @@ import UpdateContentForm from '../UpdateContentForm/UpdateContentForm.jsx';
 export default function Post({ user, setUser, postData, singlePost }) {
   const [postUser, setPostUser] = useState();
   const [comments, setComments] = useState();
+  const [currentPost, setCurrentPost] = useState(postData);
   const [postLikes, setPostLikes] = useState();
   const [editMode, setEditMode] = useState(false);
   const [validateActions, setValidateActions] = useState({
@@ -108,7 +109,6 @@ export default function Post({ user, setUser, postData, singlePost }) {
             />
             <MoreActions
               validateActions={validateActions}
-              type="post" objId={postData._id}
               editMode={editMode}
               setEditMode={setEditMode}
             />
@@ -118,11 +118,11 @@ export default function Post({ user, setUser, postData, singlePost }) {
         {editMode ?
           <UpdateContentForm
             contentData={postData} type="post"
-            editMode={editMode} setEditMode={setEditMode}
+            setEditMode={setEditMode} setContent={setCurrentPost}
           />
           :
           <p className="content my-5">
-            {postData.content}
+            {currentPost.content}
           </p>
         }
 
