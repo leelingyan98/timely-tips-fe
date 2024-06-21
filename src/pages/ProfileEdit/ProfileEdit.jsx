@@ -2,11 +2,15 @@ import { useState, useEffect } from 'react';
 import * as usersAPI from '../../utilities/users-api.js';
 import BackButton from '../../components/BackButton/BackButton.jsx';
 import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm.jsx';
+import { Button, FileInput } from "flowbite-react";
+import { useNavigate } from 'react-router';
 
 export default function ProfileEdit({ user }) {
   const [userData, setUserData] = useState();
-  const [editPicture, setEditPicture] = useState({})
+  const [editPicture, setEditPicture] = useState();
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAllUserData = async () => {
@@ -14,23 +18,38 @@ export default function ProfileEdit({ user }) {
       setUserData(userData);
     }
     getAllUserData();
-  }, [])
+  }, []);
+
+  function handleChange(evt) {
+    setEditPicture({files: evt.target.files[0]});
+
+    console.log(editPicture);
+  }
 
   async function handleProfilePicSubmit(evt) {
     evt.preventDefault();
 
     const formData = new FormData();
-    formData.append("file", editPicture);
+    formData.append("file", editPicture.files);
 
     try {
-      // await usersAPI.updateProfilePicture(formData);
-      setEditPicture(formData);
-      document.getElementById('profile-picture').value = '';
+      await usersAPI.updateUserPicture(user._id, formData);
+      document.getElementById('profilepicture').value = '';
+      navigate(0);
     } catch (error) {
       setError("Failed to update profile picture");
       console.error('Error update profile picture:', error.message);
     }
+  }
 
+  async function handleRemoveProfilePicture(evt) {
+    try {
+        await usersAPI.updateUserRemovePicture(user._id);
+        navigate(0);
+    } catch (error) {
+        setError("Failed to delete photo");
+        console.error('Error deleting photo:', error.message);
+    }
   }
 
   return (
@@ -40,17 +59,32 @@ export default function ProfileEdit({ user }) {
       <div className="form-container">
         {userData ?
           <>
-            <form autoComplete="off" onSubmit={handleProfilePicSubmit}>
-              <label htmlFor="profilepicture">Upload a photo</label>
-              <input
-                type="file"
-                id="profilepicture"
-                name="profilepicture"
-                accept="image/*"
-                onChange={(e) => setEditPicture(e.target.files[0])}
-              />
-            </form>
-            <ProfileEditForm userData={userData} />
+            <div className="flex flex-col items-center md:flex-row w-full md:justify-around p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <div className="w-3/5 flex flex-col justify-around items-center">
+                <img className="w-24 h-24 rounded-full" src={user.profilePicture.url} />
+                <p className="mt-5 text-center">It will take around 1 minute to update.</p>
+                <form autoComplete="off" onSubmit={handleProfilePicSubmit}>
+                  <FileInput
+                    type="file"
+                    id="profilepicture"
+                    name="profilepicture"
+                    accept="image/*"
+                    onChange={handleChange}
+                  />
+                  <div className="flex justify-center mt-5">
+                    { user.profilePicture.public_id !== "" ?
+                    <Button onClick={handleRemoveProfilePicture} className="mx-2 text-secondary bg-secondarylight hover:border-secondary">Remove</Button>
+                    :
+                    null
+                    }
+                    <Button type="submit" className="mx-2 text-primary">Update</Button>
+                  </div>
+                </form>
+              </div>
+              
+              <p className="error-message">{error}</p>
+              <ProfileEditForm userData={userData} />
+            </div>
           </>
           : null
         }

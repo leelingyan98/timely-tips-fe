@@ -3,6 +3,7 @@ import * as usersAPI from '../../utilities/users-api.js';
 import { Label, TextInput, Button } from "flowbite-react";
 import { HiMail } from "react-icons/hi";
 import { UserCircleIcon } from "@heroicons/react/24/solid"
+import { useNavigate } from 'react-router';
 
 export default function ProfileEditForm({ userData }) {
   const [editForm, setEditForm] = useState({
@@ -11,7 +12,8 @@ export default function ProfileEditForm({ userData }) {
     displayName: userData.displayName || " ",
   });
   const [error, setError] = useState('');
-  //   const disable = (userData.password !== userData.confirm);
+  
+  const navigate = useNavigate();
 
   const handleChange = (evt) => {
     setEditForm({
@@ -20,21 +22,12 @@ export default function ProfileEditForm({ userData }) {
     });
   };
 
-  //   async function handleProfilePicSubmit(evt) {
-  //     evt.preventDefault();
-
-  //     const formData = new FormData();
-  //     if (postDetails.files) {
-  //       formData.append('photos', postDetails.files);
-  //     }
-  //   }
-
   async function handleSubmit(evt) {
     try {
       evt.preventDefault();
 
       await usersAPI.updateUserDetails(userData._id, editForm);
-      window.location.reload();
+      navigate(0);
       setError("");
     } catch (error) {
       setError("Failed to update profile: Username or email is taken.");
@@ -62,9 +55,9 @@ export default function ProfileEditForm({ userData }) {
           id="displayName" type="displayName" name="displayName" icon={UserCircleIcon}
           value={editForm.displayName} onChange={handleChange}
         />
-        <Button type="submit" className="text-primary">Update profile</Button>
+        <Button type="submit" className="text-primary mx-auto md:mx-0">Update details</Button>
       </form>
-      <p className="error-message">&nbsp;{error}</p>
+      <p className="error-message">{error}</p>
     </div>
   );
 }

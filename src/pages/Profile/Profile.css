@@ -10,20 +10,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
-    padding: 15px 10px;
-    width: 70%;
-    align-self: center;
     border-bottom: 2px solid var(--color-primary);
-}
-
-.profile-picture {
-    margin-right: 10px;
-    width: 72px;
-}
-
-.profile-picture img {
-    border-radius: 100%;
-    width: 100%;
 }
 
 .profile-details h2, .profile-details p {

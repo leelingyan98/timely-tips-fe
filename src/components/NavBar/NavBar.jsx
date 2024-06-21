@@ -1,8 +1,5 @@
-"use client";
-
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './NavBar.css'
 import { logOut } from "../../utilities/users-service";
 import DropdownLinkItem from "../../assets/flowbite-custom/DropdownLinkItem";
@@ -32,8 +29,6 @@ export default function NavBar({ user, setUser }) {
           </Dropdown.Header>
             <DropdownLinkItem to={`/profile/${user.username}`}>Profile</DropdownLinkItem>
             <DropdownLinkItem to="/profile/edit">Settings</DropdownLinkItem>
-            {/* <Dropdown.Item><Link to={`/profile/${user.username}`}>Profile</Link></Dropdown.Item>
-            <Dropdown.Item><Link to="/profile/edit">Edit</Link></Dropdown.Item> */}
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
         </Dropdown>

@@ -1,4 +1,5 @@
 import sendRequest from './send-request';
+import axios from 'axios';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -37,15 +38,23 @@ export function search(searchTerm) {
 }
 
 export function updateUserDetails(userId, userDetails) {
-  return sendRequest(`${BASE_URL}/update/${userId}`, "PATCH", userDetails);
+  return sendRequest(`${BASE_URL}/update/${userId}/profile`, "PATCH", userDetails);
 }
 
-export function updateUserPicture(userId, userPicture) {
-  return sendRequest(`${BASE_URL}/update/picture/${userId}`, "PATCH", userPicture);
+// export function updateUserPicture(userId, userPicture) {
+//   return sendRequest(`${BASE_URL}/update/${userId}/picture/`, "PATCH", userPicture);
+// }
+
+export async function updateUserPicture(userId, userPicture) {
+  return await axios.patch(`${BASE_URL}/update/${userId}/picture/`, userPicture, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 }
 
-export function updateUserRemovePicture(userId, userPicture) {
-  return sendRequest(`${BASE_URL}/update/picture/remove/${userId}`, "PATCH", userPicture);
+export function updateUserRemovePicture(userId) {
+  return sendRequest(`${BASE_URL}/update/${userId}/picture/remove`, "PATCH");
 }
 
 export function removeUser(userId) {

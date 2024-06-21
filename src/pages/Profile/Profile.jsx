@@ -101,9 +101,9 @@ export default function Profile({ user, setUser }) {
       </div>
       {profileUser ?
         <div className="profile-container">
-          <div className="about rounded-lg shadow">
-            <div className="profile-picture">
-              <img src={`${profileUser.profilePicture.url}`} />
+          <div className="about flex self-center w-3/4 p-5 rounded-lg shadow">
+            <div className="mr-5">
+              <img className="w-24 h-24 rounded-full" src={`${profileUser.profilePicture.url}`} />
             </div>
             <div className="profile-details">
               <p>

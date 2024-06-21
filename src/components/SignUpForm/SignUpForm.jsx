@@ -78,7 +78,7 @@ export default function SignUpForm({ setUser, showLogin, setShowLogin }) {
           minLength={3}
           required
         />
-        <Button type="submit" disabled={disable} className="text-primary">Sign up</Button>
+        <Button type="submit" disabled={disable} className="text-primary w-full">Sign up</Button>
         </form>
         <p className="error-message">{error}</p>
       </Card>

@@ -7,8 +7,7 @@
   margin: 0 auto;
   padding: 2rem;
   display:flex;
-  justify-content: flex-start;
-  /* align-items: center; */
+  justify-content: center;
   text-align: center;
 }
 

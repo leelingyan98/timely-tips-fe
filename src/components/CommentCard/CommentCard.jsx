@@ -37,8 +37,8 @@ export default function CommentCard({ user, commentData, refresh }) {
                 <>
                     <div className="comments">
                         <div className="flex">
-                            <div className="display-picture">
-                                <img src={`${commentUser.profilePicture.url}`} />
+                            <div className="mr-2">
+                                <img className="w-12 h-12 rounded-full" src={`${commentUser.profilePicture.url}`} />
                             </div>
                             <div>
                                 <div className="top-row">

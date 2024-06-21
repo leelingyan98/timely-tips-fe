@@ -53,7 +53,7 @@ export default function LoginForm({ setUser, showLogin, setShowLogin }) {
             value={credentials.password} onChange={handleChange}
             required
           />
-          <Button type="submit" className="text-primary">Log in</Button>
+          <Button type="submit" className="text-primary w-full">Log in</Button>
         </form>
         <p className="error-message">{error}</p>
       </Card>

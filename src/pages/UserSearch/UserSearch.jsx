@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
-import './UserSearch.css';
-import UserSearchForm from '../../components/UserSearchForm/UserSearchForm'
-import UserSearchCard from '../../components/UserSearchCard/UserSearchCard'
+import UserSearchForm from '../../components/UserSearchForm/UserSearchForm';
+import UserSearchCard from '../../components/UserSearchCard/UserSearchCard';
 import * as usersAPI from '../../utilities/users-api.js';
 
 export default function UserSearch() {
   const [searchInput, setSearchInput] = useState('');
   const [searchData, setSearchData] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
-  
 
   useEffect(() => {
     const searchUsers = async () => {

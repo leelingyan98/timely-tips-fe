@@ -74,8 +74,8 @@ export default function Post({ user, setUser, postData, singlePost }) {
           <div className="post-creator flex">
             {postUser ?
               <>
-                <div className="display-picture">
-                  <img src={`${postUser.profilePicture.url}`} />
+                <div className="mr-3">
+                  <img className="w-16 h-16 rounded-full" src={`${postUser.profilePicture.url}`} />
                 </div>
                 <div className="post-creator-name">
                   <Link to={`/profile/${postUser.username}`}>
